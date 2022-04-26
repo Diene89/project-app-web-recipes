@@ -4,7 +4,8 @@ import Header from '../components/Header';
 function MainFood() {
   return (
     <main className="MainFood">
-      <Header />
+      <Header title="Foods" />
+      FOODS
     </main>
   );
 }
