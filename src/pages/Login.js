@@ -3,7 +3,14 @@ import React from 'react';
 function Login() {
   return (
     <main>
-      LOGIN
+      <h2>Login</h2>
+      <form>
+        <input data-testid="email-input" placeholder="Email" />
+        <input data-testid="password-input" placeholder="Password" />
+        <button data-testid="login-submit-btn" type="submit">
+          Enter
+        </button>
+      </form>
     </main>
   );
 }
