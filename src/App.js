@@ -12,7 +12,7 @@ function App() {
     <AppProvider>
       <BrowserRouter>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/food" component={ MainFood } />
+        <Route exact path="/foods" component={ MainFood } />
       </BrowserRouter>
     </AppProvider>
   );
