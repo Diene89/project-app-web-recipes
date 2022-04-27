@@ -9,7 +9,7 @@ import Routes from './components/Routes';
 function App() {
   return (
     <AppProvider>
-      <BrowserRouter>        
+      <BrowserRouter>
         <Routes />
       </BrowserRouter>
     </AppProvider>

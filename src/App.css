@@ -37,6 +37,13 @@
   font-weight: 900;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
 @keyframes shake {
 
   0% {
