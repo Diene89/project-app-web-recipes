@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import AppContext from '../context/AppContext';
 
-function Header({ title, showSearchIcon }) {
+function Header({ title, showSearchIcon, pageOfDrinks }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const [search, setSearch] = useState('');
+  const [searchType, setSearchType] = useState('Ingredient');
+  const { searchRecipesBy } = useContext(AppContext);
+
+  function handleSearchInput({ target: { value } }) {
+    setSearch(value);
+  }
 
   function renderSearchIcon() {
     return (
@@ -21,15 +29,23 @@ function Header({ title, showSearchIcon }) {
   }
 
   function renderSearchInput() {
+    const FIRST_LETTER = 'First Letter';
     return (
       <>
-        <input type="search" data-testid="search-input" />
+        <input
+          type="search"
+          data-testid="search-input"
+          value={ search }
+          onChange={ handleSearchInput }
+        />
         <label htmlFor="ingredient-search-radio">
           <input
             type="radio"
             name="search-type"
             id="ingredient-search-radio"
             data-testid="ingredient-search-radio"
+            checked={ searchType === 'Ingredient' }
+            onClick={ () => { setSearchType('Ingredient'); } }
           />
           Ingredient
         </label>
@@ -39,6 +55,8 @@ function Header({ title, showSearchIcon }) {
             name="search-type"
             id="name-search-radio"
             data-testid="name-search-radio"
+            checked={ searchType === 'Name' }
+            onClick={ () => { setSearchType('Name'); } }
           />
           Name
         </label>
@@ -48,10 +66,18 @@ function Header({ title, showSearchIcon }) {
             name="search-type"
             id="first-letter-search-radio"
             data-testid="first-letter-search-radio"
+            checked={ searchType === FIRST_LETTER }
+            onClick={ () => { setSearchType(FIRST_LETTER); } }
           />
           First Letter
         </label>
-        <button type="button" data-testid="exec-search-btn">Search</button>
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => { searchRecipesBy(searchType, search, pageOfDrinks); } }
+        >
+          Search
+        </button>
       </>
     );
   }
@@ -82,11 +108,13 @@ function Header({ title, showSearchIcon }) {
 
 Header.defaultProps = {
   showSearchIcon: true,
+  pageOfDrinks: false,
 };
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   showSearchIcon: PropTypes.bool,
+  pageOfDrinks: PropTypes.bool,
 };
 
 export default Header;
