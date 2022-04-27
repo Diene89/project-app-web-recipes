@@ -20,6 +20,42 @@ function Header({ title, showSearchIcon }) {
     );
   }
 
+  function renderSearchInput() {
+    return (
+      <>
+        <input type="search" data-testid="search-input" />
+        <label htmlFor="ingredient-search-radio">
+          <input
+            type="radio"
+            name="search-type"
+            id="ingredient-search-radio"
+            data-testid="ingredient-search-radio"
+          />
+          Ingredient
+        </label>
+        <label htmlFor="name-search-radio">
+          <input
+            type="radio"
+            name="search-type"
+            id="name-search-radio"
+            data-testid="name-search-radio"
+          />
+          Name
+        </label>
+        <label htmlFor="first-letter-search-radio">
+          <input
+            type="radio"
+            name="search-type"
+            id="first-letter-search-radio"
+            data-testid="first-letter-search-radio"
+          />
+          First Letter
+        </label>
+        <button type="button" data-testid="exec-search-btn">Search</button>
+      </>
+    );
+  }
+
   return (
     <header>
       <Link to="/profile">
@@ -38,7 +74,7 @@ function Header({ title, showSearchIcon }) {
       }
       {
         showSearchInput
-        && <input type="search" data-testid="search-input" />
+        && renderSearchInput()
       }
     </header>
   );
