@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function MainFood() {
   return (
-    <main>
-      MainFood
+    <main className="MainFood">
+      <Header title="Foods" />
+      FOODS
     </main>
   );
 }
