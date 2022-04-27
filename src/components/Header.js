@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
@@ -9,7 +9,7 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState('Ingredient');
-  const { searchRecipesBy } = useContext(AppContext);
+  const { recipes, searchRecipesBy } = useContext(AppContext);
 
   function handleSearchInput({ target: { value } }) {
     setSearch(value);
@@ -26,6 +26,17 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
         <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
       </button>
     );
+  }
+
+  function redirect() {
+    const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals;
+    if (recipesReceived && recipesReceived.length === 1) {
+      const url = pageOfDrinks
+        ? `/drinks/${recipesReceived[0].idDrink}`
+        : `/foods/${recipesReceived[0].idMeal}`;
+      return <Redirect to={ url } />;
+    }
+    return null;
   }
 
   function renderSearchInput() {
@@ -102,6 +113,7 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
         showSearchInput
         && renderSearchInput()
       }
+      { redirect() }
     </header>
   );
 }
