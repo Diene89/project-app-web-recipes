@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -9,6 +10,15 @@ function Login() {
     const validationEmail = val.test(email);
     const seis = 6;
     return !(validationEmail && password.length > seis);
+  };
+
+  const emailUser = 'email';
+  const handleSubmit = () => {
+    const { history } = props;
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ [emailUser]: email }));
+    history.push('/foods');
   };
 
   return (
@@ -31,8 +41,9 @@ function Login() {
         />
         <button
           data-testid="login-submit-btn"
-          type="submit"
+          type="button"
           disabled={ buttonValidation() }
+          onClick={ handleSubmit }
         >
           Enter
         </button>
@@ -40,5 +51,9 @@ function Login() {
     </main>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.node.isRequired,
+};
 
 export default Login;
