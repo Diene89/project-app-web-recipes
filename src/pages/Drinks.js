@@ -43,7 +43,7 @@ function Drinks() {
 
   return (
     <main className="Drink">
-      <Header title="Drinks" />
+      <Header title="Drinks" pageOfDrinks />
       {categories.map((category, index) => (<Category
         btnName={ category.strCategory }
         key={ index }
