@@ -15,6 +15,10 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
     setSearch(value);
   }
 
+  function handleSearchType({ target: { value } }) {
+    setSearchType(value);
+  }
+
   function renderSearchIcon() {
     return (
       <button
@@ -40,7 +44,6 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
   }
 
   function renderSearchInput() {
-    const FIRST_LETTER = 'First Letter';
     return (
       <>
         <input
@@ -53,10 +56,11 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           <input
             type="radio"
             name="search-type"
+            value="Ingredient"
             id="ingredient-search-radio"
             data-testid="ingredient-search-radio"
             checked={ searchType === 'Ingredient' }
-            onClick={ () => { setSearchType('Ingredient'); } }
+            onChange={ handleSearchType }
           />
           Ingredient
         </label>
@@ -64,10 +68,11 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           <input
             type="radio"
             name="search-type"
+            value="Name"
             id="name-search-radio"
             data-testid="name-search-radio"
             checked={ searchType === 'Name' }
-            onClick={ () => { setSearchType('Name'); } }
+            onChange={ handleSearchType }
           />
           Name
         </label>
@@ -75,10 +80,11 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           <input
             type="radio"
             name="search-type"
+            value="First Letter"
             id="first-letter-search-radio"
             data-testid="first-letter-search-radio"
-            checked={ searchType === FIRST_LETTER }
-            onClick={ () => { setSearchType(FIRST_LETTER); } }
+            checked={ searchType === 'First Letter' }
+            onChange={ handleSearchType }
           />
           First Letter
         </label>
