@@ -8,28 +8,38 @@ import {
 } from '../services';
 
 function AppProvider({ children }) {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState({});
 
-  async function checkFirstLetter(value, pageOfDrinks) {
+  function checkFirstLetter(value) {
     if (value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
-    } else {
-      setRecipes(await fetchRecipesByFirstLetter(value, pageOfDrinks));
+      return false;
     }
+    return true;
   }
 
   async function searchRecipesBy(type, value, pageOfDrinks) {
+    let recipesReceived;
     switch (type) {
     case 'Ingredient':
-      setRecipes(await fetchRecipesByIngredient(value, pageOfDrinks));
+      recipesReceived = await fetchRecipesByIngredient(value, pageOfDrinks);
       break;
     case 'Name':
-      setRecipes(await fetchRecipesByName(value, pageOfDrinks));
+      recipesReceived = await fetchRecipesByName(value, pageOfDrinks);
       break;
     case 'First Letter':
-      checkFirstLetter(value, pageOfDrinks);
+      if (checkFirstLetter(value)) {
+        recipesReceived = await fetchRecipesByFirstLetter(value, pageOfDrinks);
+      }
       break;
     default:
+    }
+    if (recipesReceived) {
+      if (!recipesReceived.meals && !recipesReceived.drinks) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else {
+        setRecipes(recipesReceived);
+      }
     }
   }
 
