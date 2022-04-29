@@ -44,6 +44,74 @@
   width: 100%;
 }
 
+.login {
+  align-items: center;
+  background-image: url('https://media.istockphoto.com/photos/cookbook-with-vegetables-spices-and-herbs-shot-from-above-on-rustic-picture-id1125612329?k=20&m=1125612329&s=612x612&w=0&h=Y8wMGxEgJQb_KzeVEMlWwOewvwi0FJCuvoQNQ3EnaOA=');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.login form {
+  background-color: rgba(73, 141, 56, 0.918);
+  border-radius: 50px 10px;
+  padding: 10px;
+  width: 80%;
+}
+
+.title-login {
+  color: white;
+  font-family: Poppins , sans-serif;
+  font-size: 40pt;
+  font-weight: 300;
+  margin-bottom: 10%;
+  opacity: 100%;
+  text-align: center;
+}
+
+.inputs-login {
+  text-align: center;
+  width: 100%;
+}
+
+.inputs-login input {
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 12pt;
+  margin: 10px;
+  outline: none;
+  padding: 15px;
+  width: 80%;
+}
+
+.btn-login {
+  margin-top: 20%;
+  text-align: center;
+}
+
+.btn-enter {
+  background-color: rgb(11, 133, 7);
+  border: none;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  font-family: Poppins , sans-serif;
+  font-size: 25pt;
+  margin: 10px;
+  padding: 10px;
+  transition: 600ms;
+  width: 80%;
+}
+
+.btn-enter:disabled {
+  box-shadow: none;
+  transition: 600ms;
+  color: rgb(24, 24, 24);
+  opacity: 40%;
+}
+
 @keyframes shake {
 
   0% {
