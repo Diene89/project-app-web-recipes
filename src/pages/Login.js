@@ -22,31 +22,36 @@ function Login(props) {
   };
 
   return (
-    <main>
-      <h2>Login</h2>
+    <main className="login">
       <form>
-        <input
-          data-testid="email-input"
-          placeholder="Email"
-          type="email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-        <input
-          data-testid="password-input"
-          placeholder="Password"
-          type="password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ buttonValidation() }
-          onClick={ handleSubmit }
-        >
-          Enter
-        </button>
+        <h2 className="title-login">Login</h2>
+        <section className="inputs-login">
+          <input
+            data-testid="email-input"
+            placeholder="Email"
+            type="email"
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+          <input
+            data-testid="password-input"
+            placeholder="Password"
+            type="password"
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </section>
+        <section className="btn-login">
+          <button
+            className="btn-enter"
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ buttonValidation() }
+            onClick={ handleSubmit }
+          >
+            Enter
+          </button>
+        </section>
       </form>
     </main>
   );
