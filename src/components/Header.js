@@ -33,7 +33,8 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
   }
 
   function redirect() {
-    const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals;
+    /* const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals; */
+    const recipesReceived = recipes;
     if (recipesReceived && recipesReceived.length === 1) {
       const url = pageOfDrinks
         ? `/drinks/${recipesReceived[0].idDrink}`
