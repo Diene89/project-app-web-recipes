@@ -5,7 +5,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
 
-function Header({ title, showSearchIcon, pageOfDrinks }) {
+function Header({ title, showSearchIcon, pageOfDrinks, toRedirect }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState('Ingredient');
@@ -35,7 +35,7 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
   function redirect() {
     /* const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals; */
     const recipesReceived = recipes;
-    if (recipesReceived && recipesReceived.length === 1) {
+    if (!toRedirect && recipesReceived && recipesReceived.length === 1) {
       const url = pageOfDrinks
         ? `/drinks/${recipesReceived[0].idDrink}`
         : `/foods/${recipesReceived[0].idMeal}`;
@@ -107,7 +107,7 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           <img
             data-testid="profile-top-btn"
             src={ profileIcon }
-            alt="profileIcou"
+            alt="profileIcon"
           />
         </button>
       </Link>
@@ -134,6 +134,7 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   showSearchIcon: PropTypes.bool,
   pageOfDrinks: PropTypes.bool,
+  toRedirect: PropTypes.bool.isRequired,
 };
 
 export default Header;

@@ -4,7 +4,8 @@ import Category from '../components/Category';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
-import { getDrinkCategories, getDrinks } from '../services/RecipesAPI';
+import { getDrinkCategories, getDrinks,
+  getDrinksByCategory } from '../services/RecipesAPI';
 
 function Drinks() {
   const [categories, setCategories] = useState([]);
@@ -30,6 +31,17 @@ function Drinks() {
     }
   };
 
+  const getByCategory = async (category) => {
+    try {
+      const data = await getDrinksByCategory(category);
+      const recipesReceived = await data.drinks;
+      initialRecipes(recipesReceived);
+      console.log(recipesReceived);
+    } catch (error) {
+      initialRecipes(error);
+    }
+  };
+
   useEffect(() => { getRecipes(); getCategories(); }, []);
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
@@ -40,6 +52,7 @@ function Drinks() {
         .filter((category, index) => index < categoriesQuantityLimit)
         .map((category, index) => (<Category
           btnName={ category.strCategory }
+          btnClick={ getByCategory }
           key={ index }
         />))}
       {recipes
