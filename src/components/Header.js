@@ -134,7 +134,6 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   showSearchIcon: PropTypes.bool,
   pageOfDrinks: PropTypes.bool,
-  toRedirect: PropTypes.bool.isRequired,
 };
 
 export default Header;
