@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
+import RecommendationCardCarousel from './RecommendationCardCarousel';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
@@ -102,7 +103,13 @@ function RecipeDetails({ recipe }) {
         <p data-testid="instructions">{recipe.strInstructions}</p>
         {renderVideo()}
 
-        <div data-testid="0-recomendation-card">RECEITAS RECOMENDADAS AQUI</div>
+        {recommendation && recommendation.length && (
+          <RecommendationCardCarousel
+            recommendation={ recommendation }
+            DrinkRecommendation={ !isDrinkRecipe }
+            maxRecommendedCards={ 6 }
+          />
+        )}
 
         <button type="button" data-testid="start-recipe-btn">
           Start Recipe
