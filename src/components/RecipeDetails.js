@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { getDrinks, getFoods } from '../services/RecipesAPI';
 
 function RecipeDetails({ recipe }) {
+  const [recommendation, setRecommendation] = useState([]);
   const isDrinkRecipe = recipe && recipe.strDrink !== undefined;
+
+  useEffect(() => {
+    const getRecommendation = async () => {
+      const recommendationReceived = isDrinkRecipe
+        ? (await getFoods()).meals
+        : (await getDrinks()).drinks;
+      setRecommendation(recommendationReceived);
+    };
+    if (recipe) { getRecommendation(); }
+  }, [recipe, isDrinkRecipe]);
 
   const getIngredientNameAndMeasure = () => {
     let ingredientMeasureID = 1;
@@ -66,6 +78,7 @@ function RecipeDetails({ recipe }) {
     const strRecipeThumb = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
     const strRecipe = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
     const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
+
     return (
       <>
         <img
