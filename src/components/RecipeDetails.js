@@ -4,6 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
 import RecommendationCardCarousel from './RecommendationCardCarousel';
+import './style/RecipeDetails.css';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
@@ -111,7 +112,11 @@ function RecipeDetails({ recipe }) {
           />
         )}
 
-        <button type="button" data-testid="start-recipe-btn">
+        <button
+          type="button"
+          className="start-recipe-btn"
+          data-testid="start-recipe-btn"
+        >
           Start Recipe
         </button>
       </>
@@ -119,7 +124,7 @@ function RecipeDetails({ recipe }) {
   }
 
   return (
-    <main>
+    <main className="RecipeDetails">
       {recipe && renderRecipe()}
     </main>
   );
