@@ -26,7 +26,7 @@ function AppProvider({ children }) {
   function toggleFilter() {
     setIsFiltered(!isFiltered);
   }
-
+  
   async function searchRecipesBy(type, value, pageOfDrinks) {
     let recipesReceived;
     switch (type) {
@@ -54,11 +54,13 @@ function AppProvider({ children }) {
     }
   }
 
+tela-receitas-continuacao
   const contextValue = { recipes,
     searchRecipesBy,
     initialRecipes,
     isFiltered,
     toggleFilter };
+
   return (
     <AppContext.Provider value={ contextValue }>
       {children}
