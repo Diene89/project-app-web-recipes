@@ -31,4 +31,19 @@ const getDrinkCategories = async () => {
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 };
 
-export { getFoods, getDrinks, getFoodCategories, getDrinkCategories };
+const getFoodsByCategory = async (category) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
+
+const getDrinksByCategory = async (category) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
+
+export { getFoods, getDrinks, getFoodCategories,
+  getDrinkCategories, getFoodsByCategory, getDrinksByCategory };
