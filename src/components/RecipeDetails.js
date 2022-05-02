@@ -11,7 +11,7 @@ function RecipeDetails({ recipe }) {
     const IngredientNameAndMeasure = [];
     while (recipe[`strIngredient${ingredientMeasureID}`]) {
       const ingredient = recipe[`strIngredient${ingredientMeasureID}`];
-      const measure = recipe[`strMeasure1${ingredientMeasureID}`];
+      const measure = recipe[`strMeasure${ingredientMeasureID}`];
       IngredientNameAndMeasure.push(
         `${ingredient}${measure && ` - ${measure}`}`,
       );
@@ -65,6 +65,7 @@ function RecipeDetails({ recipe }) {
   function renderRecipe() {
     const strRecipeThumb = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
     const strRecipe = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
+    const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
     return (
       <>
         <img
@@ -81,7 +82,7 @@ function RecipeDetails({ recipe }) {
             <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="whiteHeartIcon" />
           </button>
         </div>
-        <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
+        <h3 data-testid="recipe-category">{category}</h3>
         <h2>Ingredients</h2>
         {renderIngredientNameAndMeasure()}
         <h2>Instructions</h2>
@@ -115,6 +116,7 @@ RecipeDetails.propTypes = {
     strMeal: PropTypes.string,
     strMealThumb: PropTypes.string,
     strCategory: PropTypes.string,
+    strAlcoholic: PropTypes.string,
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
   }),
