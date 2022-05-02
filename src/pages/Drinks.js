@@ -72,6 +72,10 @@ function Drinks() {
           btnClick={ getByCategory }
           key={ index }
         />))}
+      <Category
+        btnName="All"
+        btnClick={ getRecipes }
+      />
       {recipes
         .filter((recipe, index) => index < recipesQuantityLimit)
         .map((drink, index) => (<RecipeCard
