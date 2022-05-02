@@ -84,6 +84,7 @@ function MainFood() {
           nameFood={ food.strMeal }
           imgSrc={ food.strMealThumb }
           key={ index }
+          detailPage={ `/foods/${food.idMeal}` }
         />))}
       <Footer />
     </main>

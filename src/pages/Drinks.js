@@ -85,6 +85,7 @@ function Drinks() {
           nameFood={ drink.strDrink }
           imgSrc={ drink.strDrinkThumb }
           key={ index }
+          detailPage={ `/drinks/${drink.idDrink}` }
         />))}
       <Footer />
     </main>
