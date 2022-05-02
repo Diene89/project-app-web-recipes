@@ -8,8 +8,8 @@ import { getFoodCategories, getFoods, getFoodsByCategory } from '../services/Rec
 
 function MainFood() {
   const [categories, setCategories] = useState([]);
-  const [isFiltered, setisFiltered] = useState(false);
-  const { recipes, initialRecipes } = useContext(AppContext);
+  const [categoryFiltered, setCategoryFiltered] = useState('');
+  const { recipes, initialRecipes, toggleFilter, isFiltered } = useContext(AppContext);
 
   const getRecipes = async () => {
     try {
@@ -32,13 +32,29 @@ function MainFood() {
   };
 
   const getByCategory = async (category) => {
-    try {
-      const data = await getFoodsByCategory(category);
-      const recipesReceived = await data.meals;
-      initialRecipes(recipesReceived);
-      setisFiltered(!isFiltered);
-    } catch (error) {
-      initialRecipes(error);
+    if (category === categoryFiltered && isFiltered === true) {
+      toggleFilter();
+      await getRecipes();
+    } else
+    if (isFiltered === true) {
+      try {
+        const data = await getFoodsByCategory(category);
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
+    } else {
+      toggleFilter();
+      try {
+        const data = await getFoodsByCategory(category);
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
     }
   };
 
@@ -47,7 +63,7 @@ function MainFood() {
   const categoriesQuantityLimit = 5;
   return (
     <main className="MainFood">
-      <Header title="Foods" toRedirect={ isFiltered } />
+      <Header title="Foods" />
       {categories
         .filter((category, index) => index < categoriesQuantityLimit)
         .map((category, index) => (<Category
@@ -55,6 +71,10 @@ function MainFood() {
           btnClick={ getByCategory }
           key={ index }
         />))}
+      <Category
+        btnName="All"
+        btnClick={ getRecipes }
+      />
       {recipes
         .filter((recipe, index) => index < recipesQuantityLimit)
         .map((food, index) => (<RecipeCard
@@ -64,6 +84,7 @@ function MainFood() {
           nameFood={ food.strMeal }
           imgSrc={ food.strMealThumb }
           key={ index }
+          detailPage={ `/foods/${food.idMeal}` }
         />))}
       <Footer />
     </main>

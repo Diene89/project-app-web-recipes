@@ -9,7 +9,7 @@ function Header({ title, showSearchIcon, pageOfDrinks, toRedirect }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState('Ingredient');
-  const { recipes, searchRecipesBy } = useContext(AppContext);
+  const { recipes, searchRecipesBy, isFiltered } = useContext(AppContext);
 
   function handleSearchInput({ target: { value } }) {
     setSearch(value);
@@ -35,7 +35,7 @@ function Header({ title, showSearchIcon, pageOfDrinks, toRedirect }) {
   function redirect() {
     /* const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals; */
     const recipesReceived = recipes;
-    if (!toRedirect && recipesReceived && recipesReceived.length === 1) {
+    if (recipesReceived && recipesReceived.length === 1) {
       const url = pageOfDrinks
         ? `/drinks/${recipesReceived[0].idDrink}`
         : `/foods/${recipesReceived[0].idMeal}`;
@@ -120,7 +120,7 @@ function Header({ title, showSearchIcon, pageOfDrinks, toRedirect }) {
         showSearchInput
         && renderSearchInput()
       }
-      { redirect() }
+      { isFiltered === false ? redirect() : null }
     </header>
   );
 }
