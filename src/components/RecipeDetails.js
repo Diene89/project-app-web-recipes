@@ -7,7 +7,7 @@ import { getDoneRecipe, getInProgressRecipe } from '../helpers/localStorage';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 
-function RecipeDetails({ recipe }) {
+function RecipeDetails({ recipe, history }) {
   const [recommendation, setRecommendation] = useState([]);
   const isDrinkRecipe = recipe.strDrink !== undefined;
 
@@ -46,15 +46,32 @@ function RecipeDetails({ recipe }) {
       );
   }
 
-  const strRecipeThumb = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
-  const strRecipe = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
-  const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
-  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
+  function redirectToRecipeInProgress(recipeID) {
+    history.push(isDrinkRecipe
+      ? `/drinks/${recipeID}/in-progress`
+      : `/foods/${recipeID}/in-progress`);
+  }
+
+  let strRecipeThumb;
+  let strRecipe;
+  let category;
+  let recipeID;
+  if (isDrinkRecipe) {
+    strRecipeThumb = recipe.strDrinkThumb;
+    strRecipe = recipe.strDrink;
+    category = recipe.strAlcoholic;
+    recipeID = recipe.idDrink;
+  } else {
+    strRecipeThumb = recipe.strMealThumb;
+    strRecipe = recipe.strMeal;
+    category = recipe.strCategory;
+    recipeID = recipe.idMeal;
+  }
   const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
   const inProgressRecipe = getInProgressRecipe(recipeID, isDrinkRecipe);
 
   return (
-    <main className="RecipeDetails">
+    <div className="RecipeDetails">
       <RecipeHeader
         recipeThumb={ strRecipeThumb }
         recipeName={ strRecipe }
@@ -81,11 +98,12 @@ function RecipeDetails({ recipe }) {
           type="button"
           className="start-recipe-btn"
           data-testid="start-recipe-btn"
+          onClick={ () => { redirectToRecipeInProgress(recipeID); } }
         >
           {inProgressRecipe ? 'Continue Recipe' : 'Start Recipe'}
         </button>
       )}
-    </main>
+    </div>
   );
 }
 
@@ -101,6 +119,9 @@ RecipeDetails.propTypes = {
     strAlcoholic: PropTypes.string,
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
