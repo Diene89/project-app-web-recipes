@@ -5,6 +5,7 @@ import RecommendationCardCarousel from './RecommendationCardCarousel';
 import './style/RecipeDetails.css';
 import getDoneRecipe from '../helpers/localStorage';
 import RecipeHeader from './RecipeHeader';
+import RecipeIngredients from './RecipeIngredients';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
@@ -22,37 +23,6 @@ function RecipeDetails({ recipe }) {
     };
     if (recipe) { getRecommendation(); }
   }, [recipe, isDrinkRecipe]);
-
-  const getIngredientNameAndMeasure = () => {
-    let ingredientMeasureID = 1;
-    const IngredientNameAndMeasure = [];
-    while (recipe[`strIngredient${ingredientMeasureID}`]) {
-      const ingredient = recipe[`strIngredient${ingredientMeasureID}`];
-      const measure = recipe[`strMeasure${ingredientMeasureID}`];
-      IngredientNameAndMeasure.push(
-        `${ingredient}${measure && ` - ${measure}`}`,
-      );
-      ingredientMeasureID += 1;
-    }
-    return IngredientNameAndMeasure;
-  };
-
-  function renderIngredientNameAndMeasure() {
-    return (
-      <ul>
-        {
-          getIngredientNameAndMeasure().map((value, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {value}
-            </li>
-          ))
-        }
-      </ul>
-    );
-  }
 
   function renderVideo() {
     const videoID = isDrinkRecipe
@@ -92,8 +62,8 @@ function RecipeDetails({ recipe }) {
           recipeCategory={ category }
         />
 
-        <h2>Ingredients</h2>
-        {renderIngredientNameAndMeasure()}
+        <RecipeIngredients recipe={ recipe } />
+
         <h2>Instructions</h2>
         <p data-testid="instructions">{recipe.strInstructions}</p>
         {renderVideo()}
