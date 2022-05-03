@@ -56,30 +56,14 @@ function RecipeDetails({ recipe, history }) {
       : `/foods/${recipeID}/in-progress`);
   }
 
-  let strRecipeThumb;
-  let strRecipe;
-  let category;
-  let recipeID;
-  if (isDrinkRecipe) {
-    strRecipeThumb = recipe.strDrinkThumb;
-    strRecipe = recipe.strDrink;
-    category = recipe.strAlcoholic;
-    recipeID = recipe.idDrink;
-  } else {
-    strRecipeThumb = recipe.strMealThumb;
-    strRecipe = recipe.strMeal;
-    category = recipe.strCategory;
-    recipeID = recipe.idMeal;
-  }
+  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
   const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
   const inProgressRecipe = getInProgressRecipe(recipeID, isDrinkRecipe);
 
   return (
     <div className="RecipeDetails">
       <RecipeHeader
-        recipeThumb={ strRecipeThumb }
-        recipeName={ strRecipe }
-        recipeCategory={ category }
+        recipe={ recipe }
         isFavoriteRecipe={ isFavoriteRecipe(recipeID, isDrinkRecipe) }
       />
 
@@ -117,11 +101,6 @@ RecipeDetails.propTypes = {
     idMeal: PropTypes.string,
     idDrink: PropTypes.string,
     strDrink: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
-    strMeal: PropTypes.string,
-    strMealThumb: PropTypes.string,
-    strCategory: PropTypes.string,
-    strAlcoholic: PropTypes.string,
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
   }).isRequired,
