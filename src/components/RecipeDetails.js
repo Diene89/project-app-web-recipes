@@ -9,10 +9,7 @@ import RecipeIngredients from './RecipeIngredients';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
-
-  const isDrinkRecipe = recipe && recipe.strDrink !== undefined;
-  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
-  const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
+  const isDrinkRecipe = recipe.strDrink !== undefined;
 
   useEffect(() => {
     const getRecommendation = async () => {
@@ -21,8 +18,8 @@ function RecipeDetails({ recipe }) {
         : (await getDrinks()).drinks;
       setRecommendation(recommendationReceived);
     };
-    if (recipe) { getRecommendation(); }
-  }, [recipe, isDrinkRecipe]);
+    getRecommendation();
+  }, [isDrinkRecipe]);
 
   function renderVideo() {
     const videoID = isDrinkRecipe
@@ -49,56 +46,47 @@ function RecipeDetails({ recipe }) {
       );
   }
 
-  function renderRecipe() {
-    const strRecipeThumb = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
-    const strRecipe = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
-    const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
-
-    return (
-      <>
-        <RecipeHeader
-          recipeThumb={ strRecipeThumb }
-          recipeName={ strRecipe }
-          recipeCategory={ category }
-        />
-
-        <RecipeIngredients recipe={ recipe } />
-
-        <h2>Instructions</h2>
-        <p data-testid="instructions">{recipe.strInstructions}</p>
-        {renderVideo()}
-
-        {recommendation && recommendation.length && (
-          <RecommendationCardCarousel
-            recommendation={ recommendation }
-            DrinkRecommendation={ !isDrinkRecipe }
-            maxRecommendedCards={ 6 }
-          />
-        )}
-
-        {doneRecipe === undefined && (
-          <button
-            type="button"
-            className="start-recipe-btn"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </button>
-        )}
-      </>
-    );
-  }
+  const strRecipeThumb = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
+  const strRecipe = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
+  const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
+  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
+  const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
 
   return (
     <main className="RecipeDetails">
-      {renderRecipe()}
+      <RecipeHeader
+        recipeThumb={ strRecipeThumb }
+        recipeName={ strRecipe }
+        recipeCategory={ category }
+      />
+
+      <RecipeIngredients recipe={ recipe } />
+
+      <h2>Instructions</h2>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
+
+      {renderVideo()}
+
+      {recommendation.length && (
+        <RecommendationCardCarousel
+          recommendation={ recommendation }
+          DrinkRecommendation={ !isDrinkRecipe }
+          maxRecommendedCards={ 6 }
+        />
+      )}
+
+      {doneRecipe === undefined && (
+        <button
+          type="button"
+          className="start-recipe-btn"
+          data-testid="start-recipe-btn"
+        >
+          Start Recipe
+        </button>
+      )}
     </main>
   );
 }
-
-RecipeDetails.defaultProps = {
-  recipe: null,
-};
 
 RecipeDetails.propTypes = {
   recipe: PropTypes.shape({
@@ -112,7 +100,7 @@ RecipeDetails.propTypes = {
     strAlcoholic: PropTypes.string,
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default RecipeDetails;
