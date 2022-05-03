@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function RecipeIngredients({ recipe }) {
+function RecipeIngredients({ recipe, showCheckbox }) {
   function getIngredientNameAndMeasure() {
     let id = 1;
     const IngredientNameAndMeasure = [];
@@ -33,16 +33,42 @@ function RecipeIngredients({ recipe }) {
     );
   }
 
+  function renderIngredientNameAndMeasureWithCheckbox() {
+    return (
+      <ul>
+        {
+          getIngredientNameAndMeasure().map((value, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              {value}
+            </li>
+          ))
+        }
+      </ul>
+    );
+  }
+
   return (
     <div>
       <h2>Ingredients</h2>
-      {renderIngredientNameAndMeasure()}
+      {
+        showCheckbox
+          ? renderIngredientNameAndMeasureWithCheckbox()
+          : renderIngredientNameAndMeasure()
+      }
     </div>
   );
 }
 
+RecipeIngredients.defaultProps = {
+  showCheckbox: false,
+};
+
 RecipeIngredients.propTypes = {
   recipe: PropTypes.shape({}).isRequired,
+  showCheckbox: PropTypes.bool,
 };
 
 export default RecipeIngredients;
