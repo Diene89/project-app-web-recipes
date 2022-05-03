@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
-  testIdImg, testIdName, detailPage, testIdCategory, testIdFavoriteBtn, toShare,
-  categoryName, testIdShare, copied, notFavorite }) {
+function DoneCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
+  testIdImg, testIdName, detailPage, testIdCategory, toShare,
+  categoryName, testIdShare, copied, tags, index, done }) {
   return (
     <div>
       <Link to={ detailPage }>
@@ -29,19 +28,19 @@ function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
         <img src={ shareIcon } alt="shareIcon" />
         {copied ? (<span>Link copied!</span>) : ''}
       </button>
-      <button
-        type="button"
-        data-testId={ testIdFavoriteBtn }
-        src={ blackHeartIcon }
-        onClick={ notFavorite }
-      >
-        <img src={ blackHeartIcon } alt="shareIcon" />
-      </button>
+      <span data-testid={ `${index}-horizontal-done-date` }>{`Done in: ${done}`}</span>
+      {tags.map((tag) => (
+        <span
+          key={ `${tag}-${index}` }
+          data-testid={ `${index}-${tag}-horizontal-tag` }
+        >
+          {tag}
+        </span>))}
     </div>
   );
 }
 
-FavoriteCard.propTypes = {
+DoneCard.propTypes = {
   nameRecipe: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   testIdImg: PropTypes.string.isRequired,
@@ -51,12 +50,13 @@ FavoriteCard.propTypes = {
   detailPage: PropTypes.string.isRequired,
   nationality: PropTypes.string.isRequired,
   testIdShare: PropTypes.string.isRequired,
-  testIdFavoriteBtn: PropTypes.string.isRequired,
   alcoholicOrNot: PropTypes.string.isRequired,
   toShare: PropTypes.func.isRequired,
-  notFavorite: PropTypes.func.isRequired,
+  tags: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   copied: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  done: PropTypes.string.isRequired,
 };
 
-export default FavoriteCard;
+export default DoneCard;
