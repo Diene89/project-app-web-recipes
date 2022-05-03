@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
 import RecommendationCardCarousel from './RecommendationCardCarousel';
 import './style/RecipeDetails.css';
 import getDoneRecipe from '../helpers/localStorage';
+import RecipeHeader from './RecipeHeader';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
@@ -87,21 +86,12 @@ function RecipeDetails({ recipe }) {
 
     return (
       <>
-        <img
-          data-testid="recipe-photo"
-          src={ strRecipeThumb }
-          alt={ strRecipe }
+        <RecipeHeader
+          recipeThumb={ strRecipeThumb }
+          recipeName={ strRecipe }
+          recipeCategory={ category }
         />
-        <div>
-          <h1 data-testid="recipe-title">{strRecipe}</h1>
-          <button type="button">
-            <img data-testid="share-btn" src={ shareIcon } alt="shareIcon" />
-          </button>
-          <button type="button">
-            <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="whiteHeartIcon" />
-          </button>
-        </div>
-        <h3 data-testid="recipe-category">{category}</h3>
+
         <h2>Ingredients</h2>
         {renderIngredientNameAndMeasure()}
         <h2>Instructions</h2>
@@ -131,7 +121,7 @@ function RecipeDetails({ recipe }) {
 
   return (
     <main className="RecipeDetails">
-      {recipe && renderRecipe()}
+      {renderRecipe()}
     </main>
   );
 }
