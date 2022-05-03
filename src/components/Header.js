@@ -5,7 +5,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
 
-function Header({ title, showSearchIcon, pageOfDrinks, toRedirect }) {
+function Header({ title, showSearchIcon, pageOfDrinks }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [search, setSearch] = useState('');
   const [searchType, setSearchType] = useState('Ingredient');
@@ -134,7 +134,6 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   showSearchIcon: PropTypes.bool,
   pageOfDrinks: PropTypes.bool,
-  toRedirect: PropTypes.bool.isRequired,
 };
 
 export default Header;
