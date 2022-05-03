@@ -9,7 +9,7 @@ function DrinksRecipe({ match }) {
 
   return (
     <main>
-      <RecipeDetails recipe={ recipe } />
+      {recipe && <RecipeDetails recipe={ recipe } />}
     </main>
   );
 }

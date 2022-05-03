@@ -5,10 +5,14 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
 import RecommendationCardCarousel from './RecommendationCardCarousel';
 import './style/RecipeDetails.css';
+import getDoneRecipe from '../helpers/localStorage';
 
 function RecipeDetails({ recipe }) {
   const [recommendation, setRecommendation] = useState([]);
+
   const isDrinkRecipe = recipe && recipe.strDrink !== undefined;
+  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
+  const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
 
   useEffect(() => {
     const getRecommendation = async () => {
@@ -112,13 +116,15 @@ function RecipeDetails({ recipe }) {
           />
         )}
 
-        <button
-          type="button"
-          className="start-recipe-btn"
-          data-testid="start-recipe-btn"
-        >
-          Start Recipe
-        </button>
+        {doneRecipe === undefined && (
+          <button
+            type="button"
+            className="start-recipe-btn"
+            data-testid="start-recipe-btn"
+          >
+            Start Recipe
+          </button>
+        )}
       </>
     );
   }
@@ -136,6 +142,8 @@ RecipeDetails.defaultProps = {
 
 RecipeDetails.propTypes = {
   recipe: PropTypes.shape({
+    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
     strDrink: PropTypes.string,
     strDrinkThumb: PropTypes.string,
     strMeal: PropTypes.string,
