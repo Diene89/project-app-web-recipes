@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
 import RecommendationCardCarousel from './RecommendationCardCarousel';
 import './style/RecipeDetails.css';
-import getDoneRecipe from '../helpers/localStorage';
+import { getDoneRecipe, getInProgressRecipe } from '../helpers/localStorage';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 
@@ -51,6 +51,7 @@ function RecipeDetails({ recipe }) {
   const category = isDrinkRecipe ? recipe.strAlcoholic : recipe.strCategory;
   const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
   const doneRecipe = getDoneRecipe(recipeID, isDrinkRecipe);
+  const inProgressRecipe = getInProgressRecipe(recipeID, isDrinkRecipe);
 
   return (
     <main className="RecipeDetails">
@@ -75,13 +76,13 @@ function RecipeDetails({ recipe }) {
         />
       )}
 
-      {doneRecipe === undefined && (
+      {(inProgressRecipe || !doneRecipe) && (
         <button
           type="button"
           className="start-recipe-btn"
           data-testid="start-recipe-btn"
         >
-          Start Recipe
+          {inProgressRecipe ? 'Continue Recipe' : 'Start Recipe'}
         </button>
       )}
     </main>
