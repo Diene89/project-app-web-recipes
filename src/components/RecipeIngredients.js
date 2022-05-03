@@ -42,7 +42,10 @@ function RecipeIngredients({ recipe, showCheckbox }) {
               key={ index }
               data-testid={ `${index}-ingredient-step` }
             >
-              {value}
+              <label htmlFor={ `${index}-ingredient-checkbox` }>
+                <input type="checkbox" id={ `${index}-ingredient-checkbox` } />
+                {value}
+              </label>
             </li>
           ))
         }
