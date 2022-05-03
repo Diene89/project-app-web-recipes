@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import clipboardCopy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function RecipeHeader({ recipeThumb, recipeName, recipeCategory }) {
+function RecipeHeader({ recipeThumb, recipeName, recipeCategory, isFavoriteRecipe }) {
   const [message, SetMessage] = useState('');
 
   function copyLink() {
@@ -27,7 +28,11 @@ function RecipeHeader({ recipeThumb, recipeName, recipeCategory }) {
           <img data-testid="share-btn" src={ shareIcon } alt="shareIcon" />
         </button>
         <button type="button">
-          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="whiteHeartIcon" />
+          <img
+            data-testid="favorite-btn"
+            src={ isFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+            alt="whiteHeartIcon"
+          />
         </button>
       </div>
       {message && <p>{message}</p>}
@@ -40,6 +45,7 @@ RecipeHeader.propTypes = {
   recipeThumb: PropTypes.string.isRequired,
   recipeName: PropTypes.string.isRequired,
   recipeCategory: PropTypes.string.isRequired,
+  isFavoriteRecipe: PropTypes.bool.isRequired,
 };
 
 export default RecipeHeader;

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { getDrinks, getFoods } from '../services/RecipesAPI';
 import RecommendationCardCarousel from './RecommendationCardCarousel';
 import './style/RecipeDetails.css';
-import { getDoneRecipe, getInProgressRecipe } from '../helpers/localStorage';
+import {
+  getDoneRecipe,
+  getInProgressRecipe,
+  isFavoriteRecipe,
+} from '../helpers/localStorage';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 
@@ -76,6 +80,7 @@ function RecipeDetails({ recipe, history }) {
         recipeThumb={ strRecipeThumb }
         recipeName={ strRecipe }
         recipeCategory={ category }
+        isFavoriteRecipe={ isFavoriteRecipe(recipeID, isDrinkRecipe) }
       />
 
       <RecipeIngredients recipe={ recipe } />
