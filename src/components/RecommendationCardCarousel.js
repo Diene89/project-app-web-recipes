@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Carousel } from 'react-bootstrap';
 import RecommendationCard from './RecommendationCard';
+import './style/RecommendationCardCarousel.css';
 
 function RecommendationCardCarousel({
   recommendation,
@@ -10,7 +11,7 @@ function RecommendationCardCarousel({
 }) {
   function getPairOfRecommendedCards(start) {
     return (
-      <>
+      <div className="carouselItem">
         {recommendation[start] && (
           <RecommendationCard
             img={ DrinkRecommendation
@@ -22,7 +23,7 @@ function RecommendationCardCarousel({
             category={ DrinkRecommendation
               ? recommendation[start].strAlcoholic
               : recommendation[start].strCategory }
-            dataTestID={ `${start}-recomendation-card` }
+            id={ start }
           />
         )}
         {recommendation[start + 1] && (
@@ -36,10 +37,10 @@ function RecommendationCardCarousel({
             category={ DrinkRecommendation
               ? recommendation[start + 1].strAlcoholic
               : recommendation[start + 1].strCategory }
-            dataTestID={ `${start + 1}-recomendation-card` }
+            id={ start + 1 }
           />
         )}
-      </>
+      </div>
     );
   }
 
@@ -59,7 +60,7 @@ function RecommendationCardCarousel({
   }
 
   return (
-    <Carousel interval={ null }>
+    <Carousel interval={ null } className="RecommendationCardCarousel">
       {getCarouselItems()}
     </Carousel>
   );
