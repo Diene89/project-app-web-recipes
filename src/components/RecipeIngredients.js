@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style/RecipeIngredients.css';
 
 function RecipeIngredients({ recipe, showCheckbox }) {
   function getIngredientNameAndMeasure() {
@@ -42,8 +43,12 @@ function RecipeIngredients({ recipe, showCheckbox }) {
               key={ index }
               data-testid={ `${index}-ingredient-step` }
             >
+              <input
+                type="checkbox"
+                className="ingredient-checkbox"
+                id={ `${index}-ingredient-checkbox` }
+              />
               <label htmlFor={ `${index}-ingredient-checkbox` }>
-                <input type="checkbox" id={ `${index}-ingredient-checkbox` } />
                 {value}
               </label>
             </li>
@@ -54,7 +59,7 @@ function RecipeIngredients({ recipe, showCheckbox }) {
   }
 
   return (
-    <div>
+    <div className="RecipeIngredients">
       <h2>Ingredients</h2>
       {
         showCheckbox
