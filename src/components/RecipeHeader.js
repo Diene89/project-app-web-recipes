@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import clipboardCopy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeHeader({ recipeThumb, recipeName, recipeCategory }) {
+  const [message, SetMessage] = useState('');
+
+  function copyLink() {
+    clipboardCopy(global.location.href);
+    SetMessage('Link copied!');
+    const messageTime = 3000;
+    setTimeout(() => { SetMessage(''); }, messageTime);
+  }
+
   return (
     <header>
       <img
@@ -13,13 +23,14 @@ function RecipeHeader({ recipeThumb, recipeName, recipeCategory }) {
       />
       <div>
         <h1 data-testid="recipe-title">{recipeName}</h1>
-        <button type="button">
+        <button type="button" onClick={ () => { copyLink(); } }>
           <img data-testid="share-btn" src={ shareIcon } alt="shareIcon" />
         </button>
         <button type="button">
           <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="whiteHeartIcon" />
         </button>
       </div>
+      {message && <p>{message}</p>}
       <h3 data-testid="recipe-category">{recipeCategory}</h3>
     </header>
   );
