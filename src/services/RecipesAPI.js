@@ -4,10 +4,8 @@ const FoodsCategoriesAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=l
 const DrinksCategoriesAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const RandomFoodAPI = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const RandomDrinkAPI = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
-
 const IngredientsFoodsAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const IngredientsDrinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-
 const FoodsAreaAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const FoodsExploreAllAPI = 'http://localhost:3000/explore/foods/nationalities';
 
