@@ -4,11 +4,13 @@ import Category from '../components/Category';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
-import { getDrinkCategories, getDrinks } from '../services/RecipesAPI';
+import { getDrinkCategories, getDrinks,
+  getDrinksByCategory } from '../services/RecipesAPI';
 
 function Drinks() {
   const [categories, setCategories] = useState([]);
-  const { recipes, initialRecipes } = useContext(AppContext);
+  const [categoryFiltered, setCategoryFiltered] = useState('');
+  const { recipes, initialRecipes, toggleFilter, isFiltered } = useContext(AppContext);
 
   const getRecipes = async () => {
     try {
@@ -30,6 +32,33 @@ function Drinks() {
     }
   };
 
+  const getByCategory = async (category) => {
+    if (category === categoryFiltered && isFiltered === true) {
+      toggleFilter();
+      await getRecipes();
+    } else
+    if (isFiltered === true) {
+      try {
+        const data = await getDrinksByCategory(category);
+        const recipesReceived = await data.drinks;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
+    } else {
+      toggleFilter();
+      try {
+        const data = await getDrinksByCategory(category);
+        const recipesReceived = await data.drinks;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
+    }
+  };
+
   useEffect(() => { getRecipes(); getCategories(); }, []);
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
@@ -40,8 +69,13 @@ function Drinks() {
         .filter((category, index) => index < categoriesQuantityLimit)
         .map((category, index) => (<Category
           btnName={ category.strCategory }
+          btnClick={ getByCategory }
           key={ index }
         />))}
+      <Category
+        btnName="All"
+        btnClick={ getRecipes }
+      />
       {recipes
         .filter((recipe, index) => index < recipesQuantityLimit)
         .map((drink, index) => (<RecipeCard
@@ -51,6 +85,7 @@ function Drinks() {
           nameFood={ drink.strDrink }
           imgSrc={ drink.strDrinkThumb }
           key={ index }
+          detailPage={ `/drinks/${drink.idDrink}` }
         />))}
       <Footer />
     </main>

@@ -9,6 +9,8 @@ import {
 
 function AppProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [ingredientRecipe, setIngredientRecipe] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   function checkFirstLetter(value) {
     if (value.length > 1) {
@@ -20,6 +22,10 @@ function AppProvider({ children }) {
 
   function initialRecipes(value) {
     setRecipes(value);
+  }
+
+  function toggleFilter() {
+    setIsFiltered(!isFiltered);
   }
 
   async function searchRecipesBy(type, value, pageOfDrinks) {
@@ -49,7 +55,14 @@ function AppProvider({ children }) {
     }
   }
 
-  const contextValue = { recipes, searchRecipesBy, initialRecipes };
+  const contextValue = { recipes,
+    searchRecipesBy,
+    initialRecipes,
+    isFiltered,
+    toggleFilter,
+    ingredientRecipe,
+    setIngredientRecipe };
+
   return (
     <AppContext.Provider value={ contextValue }>
       {children}

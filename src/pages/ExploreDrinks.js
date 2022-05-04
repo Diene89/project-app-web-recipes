@@ -1,15 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { randomDrinks } from '../services/RecipesAPI';
 
-function ExploreDrinks() {
+function ExploreDrinks(props) {
+  const { history } = props;
+
+  const getRandomRecipe = async () => {
+    const response = await randomDrinks();
+    const drink = (`/drinks/${response.drinks[0].idDrink}`);
+    history.push(drink);
+  };
+
   return (
-    <main>
-      ExploreDrinks
+    <section className="section-explore-drink">
       <Header title="Explore Drinks" showSearchIcon={ false } />
+
+      <section className="section-btn-explore">
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => {
+            history.push('/explore/drinks/ingredients');
+          } }
+        >
+          By Ingredient
+        </button>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ getRandomRecipe }
+        >
+          Surprise me!
+        </button>
+      </section>
       <Footer />
-    </main>
+    </section>
   );
 }
+
+ExploreDrinks.propTypes = {
+  history: PropTypes.node.isRequired,
+};
 
 export default ExploreDrinks;

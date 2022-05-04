@@ -16,6 +16,7 @@ import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import FoodRecipeInProgress from '../pages/FoodRecipeInProgress';
 import DrinkRecipeInProgress from '../pages/DrinkRecipeInProgress';
+import NotFound from './NotFound';
 
 function Routes() {
   return (
@@ -40,6 +41,7 @@ function Routes() {
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route path="*" component={ NotFound } />
     </>
   );
 }

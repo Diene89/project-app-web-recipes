@@ -4,19 +4,25 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import Category from '../components/Category';
-import { getFoodCategories, getFoods } from '../services/RecipesAPI';
+import { getFoodCategories, getFoods, getFoodsByCategory } from '../services/RecipesAPI';
 
 function MainFood() {
   const [categories, setCategories] = useState([]);
-  const { recipes, initialRecipes } = useContext(AppContext);
+  const [categoryFiltered, setCategoryFiltered] = useState('');
+  const { recipes, initialRecipes, toggleFilter, isFiltered,
+    ingredientRecipe, setIngredientRecipe } = useContext(AppContext);
 
   const getRecipes = async () => {
-    try {
-      const data = await getFoods();
-      const recipesReceived = await data.meals;
-      initialRecipes(recipesReceived);
-    } catch (error) {
-      initialRecipes(error);
+    if (ingredientRecipe === true) {
+      setIngredientRecipe(false);
+    } else {
+      try {
+        const data = await getFoods();
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+      } catch (error) {
+        initialRecipes(error);
+      }
     }
   };
 
@@ -30,6 +36,33 @@ function MainFood() {
     }
   };
 
+  const getByCategory = async (category) => {
+    if (category === categoryFiltered && isFiltered === true) {
+      toggleFilter();
+      await getRecipes();
+    } else
+    if (isFiltered === true) {
+      try {
+        const data = await getFoodsByCategory(category);
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
+    } else {
+      toggleFilter();
+      try {
+        const data = await getFoodsByCategory(category);
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+        setCategoryFiltered(category);
+      } catch (error) {
+        initialRecipes(error);
+      }
+    }
+  };
+
   useEffect(() => { getRecipes(); getCategories(); }, []);
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
@@ -40,8 +73,13 @@ function MainFood() {
         .filter((category, index) => index < categoriesQuantityLimit)
         .map((category, index) => (<Category
           btnName={ category.strCategory }
+          btnClick={ getByCategory }
           key={ index }
         />))}
+      <Category
+        btnName="All"
+        btnClick={ getRecipes }
+      />
       {recipes
         .filter((recipe, index) => index < recipesQuantityLimit)
         .map((food, index) => (<RecipeCard
@@ -51,6 +89,7 @@ function MainFood() {
           nameFood={ food.strMeal }
           imgSrc={ food.strMealThumb }
           key={ index }
+          detailPage={ `/foods/${food.idMeal}` }
         />))}
       <Footer />
     </main>
