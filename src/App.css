@@ -38,6 +38,7 @@
 }
 
 .footer {
+  background-color: blueviolet;
   bottom: 0;
   position: fixed;
   text-align: center;
