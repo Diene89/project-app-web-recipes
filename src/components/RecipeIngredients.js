@@ -1,27 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style/RecipeIngredients.css';
+import { getInProgressRecipe, saveInProgressRecipe } from '../helpers/localStorage';
 
 function RecipeIngredients({ recipe, showCheckbox }) {
-  function getIngredientNameAndMeasure() {
+  const isDrinkRecipe = recipe.strDrink !== undefined;
+  const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
+  const [recipeIngredients, setRecipeIngredients] = useState(
+    getInProgressRecipe(recipeID, isDrinkRecipe),
+  );
+  const [ingredientNameAndMeasure, setIngredientNameAndMeasure] = useState([]);
+
+  useEffect(() => {
     let id = 1;
-    const IngredientNameAndMeasure = [];
+    const newIngredientNameAndMeasure = [];
     while (recipe[`strIngredient${id}`]) {
       const ingredient = recipe[`strIngredient${id}`];
       const measure = recipe[`strMeasure${id}`];
-      IngredientNameAndMeasure.push(
+      newIngredientNameAndMeasure.push(
         `${ingredient}${measure && ` - ${measure}`}`,
       );
       id += 1;
     }
-    return IngredientNameAndMeasure;
+    setIngredientNameAndMeasure(newIngredientNameAndMeasure);
+  }, [recipe]);
+
+  function handleCheckbox({ target: { value, checked } }) {
+    const newRecipeIngredients = checked
+      ? recipeIngredients.concat(Number(value))
+      : recipeIngredients.filter((id) => id !== Number(value));
+    setRecipeIngredients(newRecipeIngredients);
+    saveInProgressRecipe(recipeID, isDrinkRecipe, newRecipeIngredients);
   }
 
   function renderIngredientNameAndMeasure() {
     return (
       <ul>
         {
-          getIngredientNameAndMeasure().map((value, index) => (
+          ingredientNameAndMeasure.map((value, index) => (
             <li
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
@@ -38,17 +54,19 @@ function RecipeIngredients({ recipe, showCheckbox }) {
     return (
       <ul>
         {
-          getIngredientNameAndMeasure().map((value, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-step` }
-            >
+          ingredientNameAndMeasure.map((value, index) => (
+            <li key={ index } data-testid={ `${index}-ingredient-step` }>
               <input
                 type="checkbox"
                 className="ingredient-checkbox"
                 id={ `${index}-ingredient-checkbox` }
+                value={ index }
+                checked={ recipeIngredients.includes(index) }
+                onChange={ handleCheckbox }
               />
-              <label htmlFor={ `${index}-ingredient-checkbox` }>
+              <label
+                htmlFor={ `${index}-ingredient-checkbox` }
+              >
                 {value}
               </label>
             </li>
@@ -75,7 +93,11 @@ RecipeIngredients.defaultProps = {
 };
 
 RecipeIngredients.propTypes = {
-  recipe: PropTypes.shape({}).isRequired,
+  recipe: PropTypes.shape({
+    strDrink: PropTypes.string.isRequired,
+    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
+  }).isRequired,
   showCheckbox: PropTypes.bool,
 };
 

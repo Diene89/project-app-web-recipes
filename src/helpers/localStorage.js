@@ -11,15 +11,27 @@ function getDoneRecipe(recipeID, isDrinkRecipe) {
   return recipes.find((recipe) => isTheSameRecipe(recipe, recipeID, isDrinkRecipe));
 }
 
-function getInProgressRecipe(recipeID, isDrinkRecipe) {
+function getInProgressRecipes() {
   let inProgressRecipes = localStorage.getItem('inProgressRecipes');
   inProgressRecipes = inProgressRecipes
     ? JSON.parse(inProgressRecipes)
     : { cocktails: {}, meals: {} };
+  return inProgressRecipes;
+}
+
+function getInProgressRecipe(recipeID, isDrinkRecipe) {
+  let inProgressRecipes = getInProgressRecipes();
   inProgressRecipes = isDrinkRecipe
     ? inProgressRecipes.cocktails
     : inProgressRecipes.meals;
-  return inProgressRecipes[recipeID];
+  return inProgressRecipes[recipeID] || [];
+}
+
+function saveInProgressRecipe(recipeID, isDrinkRecipe, recipeIngredients) {
+  const inProgressRecipes = getInProgressRecipes();
+  const recipeType = isDrinkRecipe ? 'cocktails' : 'meals';
+  inProgressRecipes[recipeType][recipeID] = recipeIngredients;
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
 }
 
 function getFavoriteRecipes() {
@@ -65,6 +77,7 @@ function removeRecipeFromFavorites(recipeID) {
 export {
   getDoneRecipe,
   getInProgressRecipe,
+  saveInProgressRecipe,
   getFavoriteRecipes,
   isFavoriteRecipe,
   saveRecipeAsFavorite,
