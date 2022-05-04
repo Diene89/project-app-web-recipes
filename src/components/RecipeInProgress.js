@@ -4,9 +4,13 @@ import './style/RecipeDetails.css';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 
-function RecipeInProgress({ recipe }) {
+function RecipeInProgress({ recipe, history }) {
+  function redirectToDoneRecipes() {
+    history.push('/done-recipes');
+  }
+
   return (
-    <div className="RecipeDetails">
+    <div className="RecipeInProgress">
       <RecipeHeader recipe={ recipe } />
 
       <RecipeIngredients recipe={ recipe } showCheckbox />
@@ -18,6 +22,7 @@ function RecipeInProgress({ recipe }) {
         type="button"
         className="start-recipe-btn"
         data-testid="finish-recipe-btn"
+        onClick={ redirectToDoneRecipes }
       >
         Finish Recipe
       </button>
@@ -32,6 +37,9 @@ RecipeInProgress.propTypes = {
     strDrink: PropTypes.string,
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };
 

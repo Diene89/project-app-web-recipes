@@ -94,7 +94,7 @@ RecipeIngredients.defaultProps = {
 
 RecipeIngredients.propTypes = {
   recipe: PropTypes.shape({
-    strDrink: PropTypes.string.isRequired,
+    strDrink: PropTypes.string,
     idMeal: PropTypes.string,
     idDrink: PropTypes.string,
   }).isRequired,
