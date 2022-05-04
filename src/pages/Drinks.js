@@ -10,15 +10,30 @@ import { getDrinkCategories, getDrinks,
 function Drinks() {
   const [categories, setCategories] = useState([]);
   const [categoryFiltered, setCategoryFiltered] = useState('');
-  const { recipes, initialRecipes, toggleFilter, isFiltered } = useContext(AppContext);
+  const { recipes, initialRecipes, toggleFilter,
+    isFiltered, ingredientRecipe, setIngredientRecipe } = useContext(AppContext);
+
+  // const getRecipes = async () => {
+  //   try {
+  //     const data = await getDrinks();
+  //     const recipesReceived = await data.drinks;
+  //     initialRecipes(recipesReceived);
+  //   } catch (error) {
+  //     initialRecipes(error);
+  //   }
+  // };
 
   const getRecipes = async () => {
-    try {
-      const data = await getDrinks();
-      const recipesReceived = await data.drinks;
-      initialRecipes(recipesReceived);
-    } catch (error) {
-      initialRecipes(error);
+    if (ingredientRecipe === true) {
+      setIngredientRecipe(false);
+    } else {
+      try {
+        const data = await getDrinks();
+        const recipesReceived = await data.drinks;
+        initialRecipes(recipesReceived);
+      } catch (error) {
+        initialRecipes(error);
+      }
     }
   };
 
