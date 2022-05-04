@@ -43,7 +43,7 @@ function RecipeHeader({ recipe }) {
   }
 
   function copyLink() {
-    clipboardCopy(global.location.href);
+    clipboardCopy(global.location.href.replace('/in-progress', ''));
     SetMessage('Link copied!');
     const messageTime = 3000;
     setTimeout(() => { SetMessage(''); }, messageTime);
