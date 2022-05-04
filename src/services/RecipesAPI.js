@@ -11,7 +11,6 @@ const IngredientsDrinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.p
 const FoodsAreaAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const FoodsExploreAllAPI = 'http://localhost:3000/explore/foods/nationalities';
 
-
 const getFoods = async () => {
   const response = await fetch(FoodsAPI);
   const json = await response.json();
@@ -81,7 +80,6 @@ const randomDrinks = async () => {
 
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 };
-
 
 const getIngredientsFoodsAPI = async () => {
   const response = await fetch(IngredientsFoodsAPI);
