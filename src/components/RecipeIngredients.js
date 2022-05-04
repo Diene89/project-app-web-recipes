@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import './style/RecipeIngredients.css';
 
 function RecipeIngredients({ recipe }) {
-  function getIngredientNameAndMeasure() {
+  const [ingredientNameAndMeasure, setIngredientNameAndMeasure] = useState([]);
+
+  useEffect(() => {
     let id = 1;
-    const IngredientNameAndMeasure = [];
+    const newIngredientNameAndMeasure = [];
     while (recipe[`strIngredient${id}`]) {
       const ingredient = recipe[`strIngredient${id}`];
       const measure = recipe[`strMeasure${id}`];
-      IngredientNameAndMeasure.push(
+      newIngredientNameAndMeasure.push(
         `${ingredient}${measure && ` - ${measure}`}`,
       );
       id += 1;
     }
-    return IngredientNameAndMeasure;
-  }
+    setIngredientNameAndMeasure(newIngredientNameAndMeasure);
+  }, [recipe]);
 
   function renderIngredientNameAndMeasure() {
     return (
       <ul>
         {
-          getIngredientNameAndMeasure().map((value, index) => (
+          ingredientNameAndMeasure.map((value, index) => (
             <li
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
@@ -34,15 +37,21 @@ function RecipeIngredients({ recipe }) {
   }
 
   return (
-    <div>
+    <div className="RecipeIngredients">
       <h2>Ingredients</h2>
-      {renderIngredientNameAndMeasure()}
+      {
+        renderIngredientNameAndMeasure()
+      }
     </div>
   );
 }
 
 RecipeIngredients.propTypes = {
-  recipe: PropTypes.shape({}).isRequired,
+  recipe: PropTypes.shape({
+    strDrink: PropTypes.string,
+    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
+  }).isRequired,
 };
 
 export default RecipeIngredients;
