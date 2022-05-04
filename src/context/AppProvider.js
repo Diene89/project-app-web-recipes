@@ -9,6 +9,7 @@ import {
 
 function AppProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [ingredientRecipe, setIngredientRecipe] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
 
   function checkFirstLetter(value) {
@@ -58,7 +59,9 @@ function AppProvider({ children }) {
     searchRecipesBy,
     initialRecipes,
     isFiltered,
-    toggleFilter };
+    toggleFilter,
+    ingredientRecipe,
+    setIngredientRecipe };
 
   return (
     <AppContext.Provider value={ contextValue }>

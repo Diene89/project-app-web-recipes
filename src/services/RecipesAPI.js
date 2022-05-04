@@ -4,6 +4,8 @@ const FoodsCategoriesAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=l
 const DrinksCategoriesAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const RandomFoodAPI = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const RandomDrinkAPI = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+const IngredientsFoodsAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const IngredientsDrinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 
 const getFoods = async () => {
   const response = await fetch(FoodsAPI);
@@ -61,6 +63,20 @@ const randomDrinks = async () => {
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 };
 
+const getIngredientsFoodsAPI = async () => {
+  const response = await fetch(IngredientsFoodsAPI);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
+
+const getIngredientsDrinksAPI = async () => {
+  const response = await fetch(IngredientsDrinksAPI);
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
+
 export { getFoods, getDrinks, getFoodCategories,
   getDrinkCategories, getFoodsByCategory, getDrinksByCategory,
-  randomFoods, randomDrinks };
+  randomFoods, randomDrinks, getIngredientsFoodsAPI, getIngredientsDrinksAPI };
