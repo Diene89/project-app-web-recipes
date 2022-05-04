@@ -9,15 +9,20 @@ import { getFoodCategories, getFoods, getFoodsByCategory } from '../services/Rec
 function MainFood() {
   const [categories, setCategories] = useState([]);
   const [categoryFiltered, setCategoryFiltered] = useState('');
-  const { recipes, initialRecipes, toggleFilter, isFiltered } = useContext(AppContext);
+  const { recipes, initialRecipes, toggleFilter, isFiltered,
+    ingredientRecipe, setIngredientRecipe } = useContext(AppContext);
 
   const getRecipes = async () => {
-    try {
-      const data = await getFoods();
-      const recipesReceived = await data.meals;
-      initialRecipes(recipesReceived);
-    } catch (error) {
-      initialRecipes(error);
+    if (ingredientRecipe === true) {
+      setIngredientRecipe(false);
+    } else {
+      try {
+        const data = await getFoods();
+        const recipesReceived = await data.meals;
+        initialRecipes(recipesReceived);
+      } catch (error) {
+        initialRecipes(error);
+      }
     }
   };
 
