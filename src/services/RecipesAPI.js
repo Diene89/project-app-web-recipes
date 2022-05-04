@@ -93,6 +93,11 @@ const getIngredientsFoodsAPI = async () => {
 const getIngredientsDrinksAPI = async () => {
   const response = await fetch(IngredientsDrinksAPI);
 
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
+
 const getNationalitiesAPI = async () => {
   const response = await fetch(FoodsAreaAPI);
 
@@ -103,9 +108,6 @@ const getNationalitiesAPI = async () => {
 
 export { getFoods, getDrinks, getFoodCategories,
   getDrinkCategories, getFoodsByCategory, getDrinksByCategory,
-
-  randomFoods, randomDrinks, getIngredientsFoodsAPI, getIngredientsDrinksAPI };
-
-  randomFoods, randomDrinks, getNationalitiesAPI, getFoodsByNationality,
+  randomFoods, randomDrinks, getIngredientsFoodsAPI, getIngredientsDrinksAPI,
+  getNationalitiesAPI, getFoodsByNationality,
   getAllFoodsExplore };
-
