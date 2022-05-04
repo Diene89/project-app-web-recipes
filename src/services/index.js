@@ -34,4 +34,24 @@ async function fetchRecipesByFirstLetter(firstLetter, searchForDrink = false) {
   }
 }
 
-export { fetchRecipesByIngredient, fetchRecipesByName, fetchRecipesByFirstLetter };
+async function fetchRecipeByID(id, searchForDrink = false) {
+  const URL = searchForDrink
+    ? `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    : `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  try {
+    const data = await response.json();
+    if (data.drinks) return data.drinks[0];
+    if (data.meals) return data.meals[0];
+    return null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export {
+  fetchRecipesByIngredient,
+  fetchRecipesByName,
+  fetchRecipesByFirstLetter,
+  fetchRecipeByID,
+};
