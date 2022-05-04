@@ -90,7 +90,6 @@ const getIngredientsFoodsAPI = async () => {
 
 const getIngredientsDrinksAPI = async () => {
   const response = await fetch(IngredientsDrinksAPI);
-
   const json = await response.json();
 
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
