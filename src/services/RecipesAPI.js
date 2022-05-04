@@ -11,7 +11,6 @@ const IngredientsDrinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.p
 const FoodsAreaAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const FoodsExploreAllAPI = 'http://localhost:3000/explore/foods/nationalities';
 
-
 const getFoods = async () => {
   const response = await fetch(FoodsAPI);
   const json = await response.json();
@@ -82,7 +81,6 @@ const randomDrinks = async () => {
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 };
 
-
 const getIngredientsFoodsAPI = async () => {
   const response = await fetch(IngredientsFoodsAPI);
   const json = await response.json();
@@ -92,6 +90,11 @@ const getIngredientsFoodsAPI = async () => {
 
 const getIngredientsDrinksAPI = async () => {
   const response = await fetch(IngredientsDrinksAPI);
+
+  const json = await response.json();
+
+  return response.ok ? Promise.resolve(json) : Promise.reject(json);
+};
 
 const getNationalitiesAPI = async () => {
   const response = await fetch(FoodsAreaAPI);
@@ -103,9 +106,6 @@ const getNationalitiesAPI = async () => {
 
 export { getFoods, getDrinks, getFoodCategories,
   getDrinkCategories, getFoodsByCategory, getDrinksByCategory,
-
-  randomFoods, randomDrinks, getIngredientsFoodsAPI, getIngredientsDrinksAPI };
-
-  randomFoods, randomDrinks, getNationalitiesAPI, getFoodsByNationality,
+  randomFoods, randomDrinks, getIngredientsFoodsAPI, getIngredientsDrinksAPI,
+  getNationalitiesAPI, getFoodsByNationality,
   getAllFoodsExplore };
-
