@@ -3,14 +3,20 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import './style/FavoriteCard.css';
 
 function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
   testIdImg, testIdName, detailPage, testIdCategory, testIdFavoriteBtn, toShare,
   categoryName, testIdShare, copied, notFavorite }) {
   return (
-    <div>
+    <div className="FavoriteCard">
       <Link to={ detailPage }>
-        <img src={ imgSrc } alt="foto da receita" data-testId={ testIdImg } />
+        <img
+          className="image-card"
+          src={ imgSrc }
+          alt="foto da receita"
+          data-testId={ testIdImg }
+        />
       </Link>
       <span data-testId={ testIdCategory }>
         {type === 'food'

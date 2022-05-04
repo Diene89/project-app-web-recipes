@@ -2,14 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import './style/DoneCard.css';
 
 function DoneCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
   testIdImg, testIdName, detailPage, testIdCategory, toShare,
   categoryName, testIdShare, copied, tags, index, done }) {
   return (
-    <div>
+    <div className="DoneCard">
       <Link to={ detailPage }>
-        <img src={ imgSrc } alt="foto da receita" data-testId={ testIdImg } />
+        <img
+          className="card-image"
+          src={ imgSrc }
+          alt="foto da receita"
+          data-testId={ testIdImg }
+        />
       </Link>
       <span data-testId={ testIdCategory }>
         {type === 'food'
