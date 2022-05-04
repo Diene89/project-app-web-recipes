@@ -54,7 +54,7 @@ function DoneRecipes() {
         testId="filter-by-drink-btn"
         toFilter={ filterRecipes }
       />
-      {doneRecipes.map((recipe, index) => (<DoneCard
+      {doneRecipes && doneRecipes.map((recipe, index) => (<DoneCard
         type={ recipe.type }
         nameRecipe={ recipe.name }
         imgSrc={ recipe.image }

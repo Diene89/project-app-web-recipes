@@ -61,7 +61,7 @@ function FavoriteRecipes() {
         testId="filter-by-drink-btn"
         toFilter={ filterRecipes }
       />
-      {favorites.map((recipe, index) => (<FavoriteCard
+      {favorites && favorites.map((recipe, index) => (<FavoriteCard
         type={ recipe.type }
         nameRecipe={ recipe.name }
         imgSrc={ recipe.image }

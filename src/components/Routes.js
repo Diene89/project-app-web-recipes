@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
 import MainFood from '../pages/MainFood';
 import Drinks from '../pages/Drinks';
@@ -20,7 +20,7 @@ import NotFound from './NotFound';
 
 function Routes() {
   return (
-    <>
+    <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/foods" component={ MainFood } />
       <Route exact path="/foods/:id" component={ FoodRecipe } />
@@ -42,7 +42,7 @@ function Routes() {
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route path="*" component={ NotFound } />
-    </>
+    </Switch>
   );
 }
 

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 function Profile(props) {
   const user = localStorage.getItem('user');
-  const { email } = JSON.parse(user);
+  const email = !user ? '' : JSON.parse(user).email;
   const { history } = props;
   return (
     <>
