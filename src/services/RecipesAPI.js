@@ -93,11 +93,6 @@ const getIngredientsDrinksAPI = async () => {
   return response.ok ? Promise.resolve(json) : Promise.reject(json);
 };
 
-  const json = await response.json();
-
-  return response.ok ? Promise.resolve(json) : Promise.reject(json);
-};
-
 const getNationalitiesAPI = async () => {
   const response = await fetch(FoodsAreaAPI);
 
