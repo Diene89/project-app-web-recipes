@@ -50,7 +50,7 @@ function ExploreFoods(props) {
 }
 
 ExploreFoods.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default ExploreFoods;
