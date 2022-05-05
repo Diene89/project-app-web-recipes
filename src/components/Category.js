@@ -9,10 +9,10 @@ function Category({ btnName, btnClick }) {
         textAlign: 'center',
         borderRadius: '10px',
         border: 'none' } }
-        type="button"
-        data-testid={ `${btnName}-category-filter` }
-        value={ btnName }
-        onClick={ (e) => btnClick(e.target.value) }
+      type="button"
+      data-testid={ `${btnName}-category-filter` }
+      value={ btnName }
+      onClick={ (e) => btnClick(e.target.value) }
     >
       {btnName}
     </button>
