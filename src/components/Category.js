@@ -3,7 +3,19 @@ import PropTypes from 'prop-types';
 
 function Category({ btnName }) {
   return (
-    <button type="button" data-testid={ `${btnName}-category-filter` }>{btnName}</button>
+    <button
+      style={ { marginLeft: '10px',
+        margin: '6px',
+        textAlign: 'center',
+        borderRadius: '10px',
+        border: 'none' } }
+      type="button"
+      data-testid={ `${btnName}-category-filter` }
+    >
+      {btnName}
+
+    </button>
+
   );
 }
 

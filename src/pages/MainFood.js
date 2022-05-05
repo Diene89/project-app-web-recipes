@@ -42,7 +42,7 @@ function MainFood() {
   useEffect(() => { getRecipes(); getCategories(); }, []);
 
   return (
-    <main className="MainFood">
+    <main className="">
       <Header title="Foods" />
       {categories.map((category, index) => (<Category
         btnName={ category.strCategory }
