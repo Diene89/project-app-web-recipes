@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
-import renderPath from '../services/renderPath';
+import renderWithRouter from '../services/renderPath';
 
 describe('Testa os componente da tela de Login', () => {
   const imail = 'claudio';
@@ -24,8 +24,8 @@ describe('Testa os componente da tela de Login', () => {
     expect(submitButton).toBeDisabled();
   });
   it('Redireciona para a tela de comida se os dados forem válidos', () => {
-    const { history } = renderPath(<App />);
-    history.push('/');
+    const { history } = renderWithRouter(<App />);
+    // history.push('/');
     const inputEmail = screen.getByTestId('email-input');
     const inputPassword = screen.getByTestId('password-input');
     const submitButton = screen.getByTestId('login-submit-btn');
