@@ -1,5 +1,4 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from '../helper';
 import App from '../App';
@@ -31,7 +30,7 @@ describe('Tela de Receitas Feitas', () => {
   ];
   window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
 
-  test('verifica se todos os data-testids estão presentes', async () => {
+  test('54 - Verifica se todos os data-testids estão presentes', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/done-recipes');
     const allButton = await screen.findByTestId('filter-by-all-btn');
@@ -56,33 +55,13 @@ describe('Tela de Receitas Feitas', () => {
     expect(tagName).toBeInTheDocument();
     expect(tagName1).toBeInTheDocument();
   });
-  test('verifica o card possui os atributos corretos de uma comida', async () => {
-    renderWithRouter(<App />, '/foods');
-    const nameFood = await screen.findByTestId('0-recipe-card');
-    const favoriteButton = await screen.findByTestId('favorite-btn');
-    const profileFavorite = await screen.findByTestId('profile-favorite-btn');
-    const titleRecipe = await screen.findByTestId('recipe-title');
-
-    userEvent.click(nameFood);
-    userEvent.click(favoriteButton);
-    renderWithRouter(<App />, '/profile');
-    userEvent.click(profileFavorite);
-
-    expect(titleRecipe).getAllByRole('Turkish - Side');
+  test('55 - Verifica o card possui os atributos corretos de uma comida', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/done-recipes');
+    expect(imageRecipe).toBe('have.attr', 'src');
   });
 
   test('verifica o card possui os atributos corretos de uma bebida', async () => {
-    renderWithRouter(<App />, '/drinks');
-    const nameDrink = await screen.findByTestId('0-recipe-card');
-    const favoriteButtonDrink = await screen.findByTestId('favorite-btn');
-    const profileFavorite = await screen.findByTestId('profile-favorite-btn');
-    const titleRecipe = await screen.findByTestId('recipe-title');
 
-    userEvent.click(nameDrink);
-    userEvent.click(favoriteButtonDrink);
-    renderWithRouter(<App />, '/profile');
-    userEvent.click(profileFavorite);
-
-    expect(titleRecipe).toBeInTheDocument('Optional alcohol');
   });
 });
