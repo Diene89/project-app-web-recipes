@@ -67,7 +67,7 @@ function MainFood() {
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
   return (
-    <main className="MainFood">
+    <main className="">
       <Header title="Foods" />
       {categories
         .filter((category, index) => index < categoriesQuantityLimit)
