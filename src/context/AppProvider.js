@@ -8,7 +8,9 @@ import {
 } from '../services';
 
 function AppProvider({ children }) {
-  const [recipes, setRecipes] = useState({});
+  const [recipes, setRecipes] = useState([]);
+  const [ingredientRecipe, setIngredientRecipe] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   function checkFirstLetter(value) {
     if (value.length > 1) {
@@ -16,6 +18,14 @@ function AppProvider({ children }) {
       return false;
     }
     return true;
+  }
+
+  function initialRecipes(value) {
+    setRecipes(value);
+  }
+
+  function toggleFilter() {
+    setIsFiltered(!isFiltered);
   }
 
   async function searchRecipesBy(type, value, pageOfDrinks) {
@@ -38,12 +48,21 @@ function AppProvider({ children }) {
       if (!recipesReceived.meals && !recipesReceived.drinks) {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
       } else {
-        setRecipes(recipesReceived);
+        const recipesResults = pageOfDrinks
+          ? recipesReceived.drinks : recipesReceived.meals;
+        setRecipes(recipesResults);
       }
     }
   }
 
-  const contextValue = { recipes, searchRecipesBy };
+  const contextValue = { recipes,
+    searchRecipesBy,
+    initialRecipes,
+    isFiltered,
+    toggleFilter,
+    ingredientRecipe,
+    setIngredientRecipe };
+
   return (
     <AppContext.Provider value={ contextValue }>
       {children}

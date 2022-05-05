@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useRecipeDetails from '../hooks/useRecipeDetails';
-import RecipeDetails from '../components/RecipeDetails';
+import RecipeInProgress from '../components/RecipeInProgress';
 
-function FoodRecipe({ match, history }) {
+function DrinkRecipeInProgress({ match, history }) {
   const { id } = match.params;
-  const recipe = useRecipeDetails(id, false);
+  const recipe = useRecipeDetails(id, true);
 
   return (
     <main>
-      {recipe && <RecipeDetails recipe={ recipe } history={ history } />}
+      {recipe && <RecipeInProgress recipe={ recipe } history={ history } />}
     </main>
   );
 }
 
-FoodRecipe.propTypes = {
+DrinkRecipeInProgress.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -23,4 +23,4 @@ FoodRecipe.propTypes = {
   history: PropTypes.shape({}).isRequired,
 };
 
-export default FoodRecipe;
+export default DrinkRecipeInProgress;
