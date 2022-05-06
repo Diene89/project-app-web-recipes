@@ -5,8 +5,10 @@ import renderWithRouter from './helper/renderWithRouter';
 import App from '../App';
 import fetch from './mocks/fetch';
 import meal from './mocks/meal';
+import drink from './mocks/drink';
 
 const exploreFoodsRoute = 'explore/foods';
+const exploreDrinksRoute = 'explore/drinks';
 
 beforeEach(() => { global.fetch = jest.fn(fetch); });
 
@@ -71,5 +73,35 @@ describe('Testa os botões de redirecionar da tela de explorar comidas', () => {
     const { idMeal } = meal.meals[0];
     const { location: { pathname } } = history;
     expect(pathname).toContain(`/foods/${idMeal}`);
+  });
+});
+
+describe('Testa os botões de redirecionar da tela de explorar bebidas', () => {
+  test(`Ao clicar no botão "By Ingredient" a rota
+        deve mudar para /explore/drinks/ingredients`, async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(exploreDrinksRoute);
+
+    const byIngredientBtn = await screen.findByRole('button', { name: 'By Ingredient' });
+    userEvent.click(byIngredientBtn);
+
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/explore/drinks/ingredients');
+  });
+
+  test(`Ao clicar no botão "Surprise me!" a rota
+        deve mudar para /explore/drinks/\${ID}
+        sendo \${ID} o id de uma bebida aleatória`, async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(exploreDrinksRoute);
+
+    const surpriseMeBtn = await screen.findByRole('button', { name: 'Surprise me!' });
+    userEvent.click(surpriseMeBtn);
+
+    await screen.findByText('Ingredients');
+
+    const { idDrink } = drink.drinks[0];
+    const { location: { pathname } } = history;
+    expect(pathname).toContain(`/drinks/${idDrink}`);
   });
 });
