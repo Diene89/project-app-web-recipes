@@ -195,6 +195,10 @@ header {
   margin: 0 auto;
 }
 
+.div-recipes {
+  margin-bottom: 70px;
+}
+
 @keyframes shake {
 
   0% {
