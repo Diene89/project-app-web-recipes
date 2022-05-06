@@ -38,15 +38,15 @@
 }
 
 .footer {
+  align-items: center;
   background-color: rgb(11, 133, 7);
   bottom: 0;
+  display: flex;
   height: 60px;
+  justify-content: space-evenly;
   left: 0;
   position: fixed;
   width: 100%;
-  align-items: center;
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .footer > a {
@@ -123,15 +123,15 @@
 }
 
 header {
-  width: 100%;
   align-items: center;
   background-color: rgb(255, 166, 0);
   color: black;
   display: flex;
   height: 100%;
   justify-content: space-between;
-  padding: 5px;
   left: 0;
+  padding: 5px;
+  width: 100%;
 }
 
 .section-header {
@@ -165,22 +165,22 @@ header {
   color: #464646;
   display: flex;
   flex-flow: row wrap;
+  flex-wrap: wrap;
   font-family: sans-serif;
   justify-content: space-evenly;
-  flex-wrap: wrap;
 }
 
 .section-recipe-card > a {
+  align-content: space-between;
   background-color: white;
   border: 1px solid rgb(185, 185, 185);
   border-radius: 10px;
   box-shadow: 1px 5px 3px rgb(185, 185, 185);
   font-size: 14pt;
-  align-content: space-between;
   justify-content: space-around;
+  margin-bottom: 10px;
   text-align: center;
   width: 30%;
-  margin-bottom: 10px;
 }
 
 .section-recipe-card > a img {
@@ -191,8 +191,8 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 90%;
   margin: 0 auto;
+  width: 90%;
 }
 
 .div-recipes {

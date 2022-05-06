@@ -58,7 +58,7 @@ function DrinksIngredients(props) {
 }
 
 DrinksIngredients.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default DrinksIngredients;
