@@ -67,30 +67,35 @@ function MainFood() {
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
   return (
-    <main className="MainFood">
+    <main className="">
       <Header title="Foods" />
-      {categories
-        .filter((category, index) => index < categoriesQuantityLimit)
-        .map((category, index) => (<Category
-          btnName={ category.strCategory }
-          btnClick={ getByCategory }
-          key={ index }
-        />))}
-      <Category
-        btnName="All"
-        btnClick={ getRecipes }
-      />
-      {recipes
-        .filter((recipe, index) => index < recipesQuantityLimit)
-        .map((food, index) => (<RecipeCard
-          testIdCard={ `${index}-recipe-card` }
-          testIdImg={ `${index}-card-img` }
-          testIdName={ `${index}-card-name` }
-          nameFood={ food.strMeal }
-          imgSrc={ food.strMealThumb }
-          key={ index }
-          detailPage={ `/foods/${food.idMeal}` }
-        />))}
+      <div className="div-recipes">
+        {categories
+          .filter((category, index) => index < categoriesQuantityLimit)
+          .map((category, index) => (<Category
+            btnName={ category.strCategory }
+            btnClick={ getByCategory }
+            key={ index }
+          />))}
+        <Category
+          btnName="All"
+          btnClick={ getRecipes }
+        />
+        <section className="section-recipe-card">
+          {recipes
+            .filter((recipe, index) => index < recipesQuantityLimit)
+            .map((food, index) => (<RecipeCard
+              testIdCard={ `${index}-recipe-card` }
+              testIdImg={ `${index}-card-img` }
+              testIdName={ `${index}-card-name` }
+              nameFood={ food.strMeal }
+              imgSrc={ food.strMealThumb }
+              key={ index }
+              detailPage={ `/foods/${food.idMeal}` }
+            />))}
+        </section>
+      </div>
+
       <Footer />
     </main>
   );

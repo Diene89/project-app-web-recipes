@@ -8,9 +8,15 @@ function Category({ btnName, btnClick }) {
       data-testid={ `${btnName}-category-filter` }
       value={ btnName }
       onClick={ (e) => btnClick(e.target.value) }
+      style={ { marginLeft: '10px',
+        margin: '6px',
+        textAlign: 'center',
+        borderRadius: '10px',
+        border: 'none' } }
     >
       {btnName}
     </button>
+
   );
 }
 

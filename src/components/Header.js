@@ -21,14 +21,19 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
 
   function renderSearchIcon() {
     return (
-      <button
-        type="button"
-        onClick={
-          () => (setShowSearchInput((currentShowSearchInput) => !currentShowSearchInput))
-        }
-      >
-        <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
-      </button>
+      <section className="section-header">
+        <button
+          type="button"
+          onClick={
+            () => (setShowSearchInput(
+              (currentShowSearchInput) => !currentShowSearchInput,
+            ))
+          }
+        >
+          <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
+        </button>
+      </section>
+
     );
   }
 
@@ -46,7 +51,7 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
 
   function renderSearchInput() {
     return (
-      <>
+      <section className="header-search-input">
         <input
           type="search"
           data-testid="search-input"
@@ -89,19 +94,22 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           />
           First Letter
         </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ () => { searchRecipesBy(searchType, search, pageOfDrinks); } }
-        >
-          Search
-        </button>
-      </>
+        <div className="button-search-header">
+          <button
+            type="button"
+            data-testid="exec-search-btn"
+            onClick={ () => { searchRecipesBy(searchType, search, pageOfDrinks); } }
+          >
+            Search
+          </button>
+        </div>
+
+      </section>
     );
   }
 
   return (
-    <header>
+    <header className="header-profile">
       <Link to="/profile">
         <button type="button">
           <img
@@ -110,8 +118,9 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
             alt="profileIcon"
           />
         </button>
+
       </Link>
-      <span data-testid="page-title">{title}</span>
+      <h2 className="title-name" data-testid="page-title">{title}</h2>
       {
         showSearchIcon
         && renderSearchIcon()
