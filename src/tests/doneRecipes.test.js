@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../helper';
 import App from '../App';
 
@@ -58,6 +59,7 @@ describe('Tela de Receitas Feitas', () => {
   test('55 - Verifica o card possui os atributos corretos de uma comida', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/done-recipes');
+    userEvent.click();
     expect(imageRecipe).toBe('have.attr', 'src');
   });
 
