@@ -80,17 +80,20 @@ function MainFood() {
         btnName="All"
         btnClick={ getRecipes }
       />
-      {recipes
-        .filter((recipe, index) => index < recipesQuantityLimit)
-        .map((food, index) => (<RecipeCard
-          testIdCard={ `${index}-recipe-card` }
-          testIdImg={ `${index}-card-img` }
-          testIdName={ `${index}-card-name` }
-          nameFood={ food.strMeal }
-          imgSrc={ food.strMealThumb }
-          key={ index }
-          detailPage={ `/foods/${food.idMeal}` }
-        />))}
+      <section className="section-recipe-card">
+        {recipes
+          .filter((recipe, index) => index < recipesQuantityLimit)
+          .map((food, index) => (<RecipeCard
+            testIdCard={ `${index}-recipe-card` }
+            testIdImg={ `${index}-card-img` }
+            testIdName={ `${index}-card-name` }
+            nameFood={ food.strMeal }
+            imgSrc={ food.strMealThumb }
+            key={ index }
+            detailPage={ `/foods/${food.idMeal}` }
+          />))}
+      </section>
+
       <Footer />
     </main>
   );

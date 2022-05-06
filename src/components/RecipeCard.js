@@ -6,7 +6,11 @@ function RecipeCard({ nameFood, imgSrc, testIdCard, testIdImg, testIdName, detai
   return (
     <Link to={ detailPage }>
       <div className="recipe-card" data-testId={ testIdCard }>
-        <img src={ imgSrc } alt="foto da receita" data-testId={ testIdImg } />
+        <img
+          src={ imgSrc }
+          alt="foto da receita"
+          data-testId={ testIdImg }
+        />
         <span data-testId={ testIdName }>{nameFood}</span>
       </div>
     </Link>

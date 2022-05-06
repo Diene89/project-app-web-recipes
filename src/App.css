@@ -46,7 +46,11 @@
   width: 100%;
   align-items: center;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
+}
+
+.footer > a {
+  padding: 10px;
 }
 
 .login {
@@ -166,15 +170,29 @@ header {
   flex-wrap: wrap;
 }
 
-.recipe-card {
+.section-recipe-card > a {
   background-color: white;
   border: 1px solid rgb(185, 185, 185);
   border-radius: 10px;
   box-shadow: 1px 5px 3px rgb(185, 185, 185);
   font-size: 14pt;
-  margin: 10px;
+  align-content: space-between;
+  justify-content: space-around;
   text-align: center;
-  width: 150px;
+  width: 30%;
+  margin-bottom: 10px;
+}
+
+.section-recipe-card > a img {
+  width: 100%;
+}
+
+.section-recipe-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
 }
 
 @keyframes shake {

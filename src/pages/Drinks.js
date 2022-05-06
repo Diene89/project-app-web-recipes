@@ -78,7 +78,7 @@ function Drinks() {
   const recipesQuantityLimit = 12;
   const categoriesQuantityLimit = 5;
   return (
-    <main className="Drink">
+    <main className="">
       <Header title="Drinks" pageOfDrinks />
       {categories
         .filter((category, index) => index < categoriesQuantityLimit)
@@ -91,17 +91,19 @@ function Drinks() {
         btnName="All"
         btnClick={ getRecipes }
       />
-      {recipes
-        .filter((recipe, index) => index < recipesQuantityLimit)
-        .map((drink, index) => (<RecipeCard
-          testIdCard={ `${index}-recipe-card` }
-          testIdImg={ `${index}-card-img` }
-          testIdName={ `${index}-card-name` }
-          nameFood={ drink.strDrink }
-          imgSrc={ drink.strDrinkThumb }
-          key={ index }
-          detailPage={ `/drinks/${drink.idDrink}` }
-        />))}
+      <section className="section-recipe-card">
+        {recipes
+          .filter((recipe, index) => index < recipesQuantityLimit)
+          .map((drink, index) => (<RecipeCard
+            testIdCard={ `${index}-recipe-card` }
+            testIdImg={ `${index}-card-img` }
+            testIdName={ `${index}-card-name` }
+            nameFood={ drink.strDrink }
+            imgSrc={ drink.strDrinkThumb }
+            key={ index }
+            detailPage={ `/drinks/${drink.idDrink}` }
+          />))}
+      </section>
       <Footer />
     </main>
   );
