@@ -1,6 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { screen, waitFor } from '@testing-library/react';
 import renderWithRouter from '../helper';
 import App from '../App';
 
@@ -12,7 +12,7 @@ describe('Tela de Receitas Feitas', () => {
       nationality: 'Italian',
       category: 'Vegetarian',
       alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
+      name: 'SpicyArrabiataPenne',
       image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
       doneDate: '23/06/2020',
       tags: ['Pasta', 'Curry'],
@@ -31,17 +31,20 @@ describe('Tela de Receitas Feitas', () => {
   ];
   window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
 
-  test('54 - Verifica se todos os data-testids estão presentes', async () => {
+  test('verifica se todos os componentes e data-testids estão presentes', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/done-recipes');
+
     const allButton = await screen.findByTestId('filter-by-all-btn');
     const foodButton = await screen.findByTestId('filter-by-food-btn');
     const drinkButton = await screen.findByTestId('filter-by-drink-btn');
     const imageRecipe = await screen.findByTestId('0-horizontal-image');
     const categoryRecipe = await screen.findByTestId('0-horizontal-top-text');
-    const nameRecipe = await screen.findByTestId('1-horizontal-name');
+    const nameRecipe0 = await screen.findByTestId('0-horizontal-name');
+    const nameRecipe1 = await screen.findByTestId('1-horizontal-name');
     const doneDate = await screen.findByTestId('1-horizontal-done-date');
-    const shareRecipe = await screen.findByTestId('1-horizontal-share-btn');
+    const shareRecipe0 = await screen.findByTestId('0-horizontal-share-btn');
+    const shareRecipe1 = await screen.findByTestId('1-horizontal-share-btn');
     const tagName = await screen.findByTestId('0-Curry-horizontal-tag');
     const tagName1 = await screen.findByTestId('0-Pasta-horizontal-tag');
 
@@ -50,20 +53,42 @@ describe('Tela de Receitas Feitas', () => {
     expect(drinkButton).toBeInTheDocument();
     expect(imageRecipe).toBeInTheDocument();
     expect(categoryRecipe).toBeInTheDocument();
-    expect(nameRecipe).toBeInTheDocument();
     expect(doneDate).toBeInTheDocument();
-    expect(shareRecipe).toBeInTheDocument();
+    expect(shareRecipe0).toBeInTheDocument();
+    expect(shareRecipe1).toBeInTheDocument();
     expect(tagName).toBeInTheDocument();
     expect(tagName1).toBeInTheDocument();
-  });
-  test('55 - Verifica o card possui os atributos corretos de uma comida', async () => {
-    const { history } = renderWithRouter(<App />);
-    history.push('/done-recipes');
-    userEvent.click();
-    expect(imageRecipe).toBe('have.attr', 'src');
+    expect(nameRecipe0).toBeInTheDocument('SpicyArrabiataPenne');
+    expect(nameRecipe1).toBeInTheDocument('Aquamarine');
   });
 
-  test('verifica o card possui os atributos corretos de uma bebida', async () => {
+  test('verifica o botão de compartilhar e se a URL é copiada para o clipboard',
+    async () => {
+      const { history } = renderWithRouter(<App />);
+      history.push('/done-recipes');
 
-  });
+      const allButton = await screen.findByTestId('filter-by-all-btn');
+      const foodButton = await screen.findByTestId('filter-by-food-btn');
+      const drinkButton = await screen.findByTestId('filter-by-drink-btn');
+      const nameRecipe0 = await screen.findByTestId('0-horizontal-name');
+      const shareRecipe0 = await screen.findByTestId('0-horizontal-share-btn');
+      const nameRecipe1 = await screen.findByTestId('1-horizontal-name');
+
+      userEvent.click(foodButton);
+      expect(nameRecipe0).toHaveTextContent('SpicyArrabiataPenne');
+
+      userEvent.click(drinkButton);
+      expect(nameRecipe0).toContainHTML('Aquamarine');
+
+      userEvent.click(allButton);
+      expect(nameRecipe0).toContainHTML('SpicyArrabiataPenne');
+      expect(nameRecipe1).toContainHTML('Aquamarine');
+
+      userEvent.click(shareRecipe0);
+      const copied = await screen.findByText('Link copied!');
+      expect(copied).toContainHTML('Link copied!');
+
+      userEvent.click(nameRecipe0);
+      waitFor(() => { (nameRecipe0).toContainHTML('SpicyArrabiataPenne'); });
+    });
 });
