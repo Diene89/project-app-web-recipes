@@ -14,20 +14,20 @@ function DoneCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
           className="card-image"
           src={ imgSrc }
           alt="foto da receita"
-          data-testId={ testIdImg }
+          data-testid={ testIdImg }
         />
       </Link>
-      <span data-testId={ testIdCategory }>
+      <span data-testid={ testIdCategory }>
         {type === 'food'
           ? `${nationality} - ${categoryName}`
           : alcoholicOrNot }
       </span>
       <Link to={ detailPage }>
-        <span data-testId={ testIdName }>{nameRecipe}</span>
+        <span data-testid={ testIdName }>{nameRecipe}</span>
       </Link>
       <button
         type="button"
-        data-testId={ testIdShare }
+        data-testid={ testIdShare }
         src={ shareIcon }
         onClick={ toShare }
       >

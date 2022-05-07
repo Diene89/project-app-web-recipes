@@ -5,6 +5,10 @@ import mealIngredients from './mealIngredients';
 import areas from './areas';
 import drinkIngredients from './drinkIngredients';
 import drink from './drink';
+import mealCategories from './mealCategories';
+import chickenMeals from './chickenMeals';
+import lightRumDrinks from './lightRumDrinks';
+import drinksCategories from './drinksCategories';
 
 const fetch = (url) => Promise.resolve({
   status: 200,
@@ -21,10 +25,18 @@ const fetch = (url) => Promise.resolve({
       return Promise.resolve(meal);
     case 'https://www.themealdb.com/api/json/v1/1/search.php?s=':
       return Promise.resolve(meals);
+    case 'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken':
+      return Promise.resolve(chickenMeals);
+    case 'https://www.themealdb.com/api/json/v1/1/list.php?c=list':
+      return Promise.resolve(mealCategories);
     case 'https://www.themealdb.com/api/json/v1/1/list.php?i=list':
       return Promise.resolve(mealIngredients);
     case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=':
       return Promise.resolve(drinks);
+    case 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Light rum':
+      return Promise.resolve(lightRumDrinks);
+    case 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list':
+      return Promise.resolve(drinksCategories);
     case 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list':
       return Promise.resolve(drinkIngredients);
     case 'https://www.thecocktaildb.com/api/json/v1/1/random.php':
