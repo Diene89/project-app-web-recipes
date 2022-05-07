@@ -42,6 +42,8 @@ describe('Testa os botões de redirecionar da tela de explorar comidas', () => {
     const byIngredientBtn = await screen.findByRole('button', { name: 'By Ingredient' });
     userEvent.click(byIngredientBtn);
 
+    await screen.findByText('Explore Ingredients');
+
     const { location: { pathname } } = history;
     expect(pathname).toBe('/explore/foods/ingredients');
   });
@@ -54,6 +56,8 @@ describe('Testa os botões de redirecionar da tela de explorar comidas', () => {
     const byNationalityBtn = await screen
       .findByRole('button', { name: 'By Nationality' });
     userEvent.click(byNationalityBtn);
+
+    await screen.findByText('Explore Nationalities');
 
     const { location: { pathname } } = history;
     expect(pathname).toBe('/explore/foods/nationalities');
@@ -84,6 +88,8 @@ describe('Testa os botões de redirecionar da tela de explorar bebidas', () => {
 
     const byIngredientBtn = await screen.findByRole('button', { name: 'By Ingredient' });
     userEvent.click(byIngredientBtn);
+
+    await screen.findByText('Explore Ingredients');
 
     const { location: { pathname } } = history;
     expect(pathname).toBe('/explore/drinks/ingredients');
