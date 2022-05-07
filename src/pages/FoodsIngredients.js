@@ -22,7 +22,6 @@ function FoodsIngredients(props) {
   useEffect(() => {
     const getIngredients = async () => {
       const results = await getIngredientsFoodsAPI();
-      console.log(results);
       setIngredientsList(results.meals);
     };
     getIngredients();
