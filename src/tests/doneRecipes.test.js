@@ -1,35 +1,42 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import renderWithRouter from '../helper';
 import App from '../App';
+import fetch from './mocks/fetch';
 
 describe('Tela de Receitas Feitas', () => {
-  const doneRecipes = [
-    {
-      id: '52771',
-      type: 'food',
-      nationality: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'SpicyArrabiataPenne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '23/06/2020',
-      tags: ['Pasta', 'Curry'],
-    },
-    {
-      id: '178319',
-      type: 'drink',
-      nationality: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '23/06/2020',
-      tags: [],
-    },
-  ];
-  window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+  beforeEach(() => {
+    global.fetch = jest.fn(fetch);
+    global.navigator.clipboard = {
+      writeText: jest.fn(),
+    };
+    const doneRecipes = [
+      {
+        id: '52771',
+        type: 'food',
+        nationality: 'Italian',
+        category: 'Vegetarian',
+        alcoholicOrNot: '',
+        name: 'SpicyArrabiataPenne',
+        image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+        doneDate: '23/06/2020',
+        tags: ['Pasta', 'Curry'],
+      },
+      {
+        id: '178319',
+        type: 'drink',
+        nationality: '',
+        category: 'Cocktail',
+        alcoholicOrNot: 'Alcoholic',
+        name: 'Aquamarine',
+        image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+        doneDate: '23/06/2020',
+        tags: [],
+      },
+    ];
+    window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+  });
 
   test('verifica se todos os componentes e data-testids estão presentes', async () => {
     const { history } = renderWithRouter(<App />);
@@ -85,10 +92,10 @@ describe('Tela de Receitas Feitas', () => {
       expect(nameRecipe1).toContainHTML('Aquamarine');
 
       userEvent.click(shareRecipe0);
-      const copied = await screen.findByText('Link copied!');
-      expect(copied).toContainHTML('Link copied!');
+      // const copied = screen.findAllByRole('Link copied!');
+      expect(navigator.clipboard).toHaveBeenCalledWith('Link copied!');
 
-      userEvent.click(nameRecipe0);
-      waitFor(() => { (nameRecipe0).toContainHTML('SpicyArrabiataPenne'); });
+      // userEvent.click(nameRecipe0);
+      // waitForExpect(() => { (nameRecipe0).toContainHTML('SpicyArrabiataPenne'); });
     });
 });
