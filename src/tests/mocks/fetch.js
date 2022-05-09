@@ -1,4 +1,5 @@
 import meal from './meal';
+import drink from './drink';
 import meals from './meals';
 import drinks from './drinks';
 import mealIngredients from './mealIngredients';
@@ -62,6 +63,7 @@ const fetch = (url) => Promise.resolve({
   status: 200,
   ok: true,
   json: () => {
+
     console.log('URL', url);
     if (url.includes('themealdb')) return theMealDb(url);
     if (url.includes('thecocktaildb')) return theCocktailDb(url);
@@ -70,3 +72,6 @@ const fetch = (url) => Promise.resolve({
 });
 
 export default fetch;
+
+/* `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}` */
