@@ -20,17 +20,19 @@ function getInProgressRecipes() {
 }
 
 function getInProgressRecipe(recipeID, isDrinkRecipe) {
-  let inProgressRecipes = getInProgressRecipes();
-  inProgressRecipes = isDrinkRecipe
-    ? inProgressRecipes.cocktails
-    : inProgressRecipes.meals;
-  return inProgressRecipes[recipeID] || [];
+  const inProgressRecipes = getInProgressRecipes();
+  const recipeType = isDrinkRecipe ? 'cocktails' : 'meals';
+  return inProgressRecipes[recipeType][recipeID];
 }
 
 function saveInProgressRecipe(recipeID, isDrinkRecipe, recipeIngredients) {
   const inProgressRecipes = getInProgressRecipes();
   const recipeType = isDrinkRecipe ? 'cocktails' : 'meals';
-  inProgressRecipes[recipeType][recipeID] = recipeIngredients;
+  if (recipeIngredients.length) {
+    inProgressRecipes[recipeType][recipeID] = recipeIngredients;
+  } else {
+    delete inProgressRecipes[recipeType][recipeID];
+  }
   localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
 }
 

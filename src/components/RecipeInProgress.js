@@ -8,7 +8,7 @@ function RecipeInProgress({ recipe, history }) {
   const isDrinkRecipe = recipe.strDrink !== undefined;
   const recipeID = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
   const [recipeIngredients, setRecipeIngredients] = useState(
-    getInProgressRecipe(recipeID, isDrinkRecipe),
+    getInProgressRecipe(recipeID, isDrinkRecipe) || [],
   );
   const [ingredientNameAndMeasure, setIngredientNameAndMeasure] = useState([]);
 
