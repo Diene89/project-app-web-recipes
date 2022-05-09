@@ -10,7 +10,7 @@ describe('Testa os componente da tela de Login', () => {
   const zenha = 'abc';
   const senha = 'teste123';
   it('Tenta digitar nos inputs de email, password e o botão permanece inativo', () => {
-    const { history } = renderPath(<App />);
+    const { history } = renderWithRouter(<App />);
     history.push('/');
     const inputEmail = screen.getByTestId('email-input');
     const inputPassword = screen.getByTestId('password-input');
@@ -25,7 +25,7 @@ describe('Testa os componente da tela de Login', () => {
   });
   it('Redireciona para a tela de comida se os dados forem válidos', () => {
     const { history } = renderWithRouter(<App />);
-    // history.push('/');
+    history.push('/');
     const inputEmail = screen.getByTestId('email-input');
     const inputPassword = screen.getByTestId('password-input');
     const submitButton = screen.getByTestId('login-submit-btn');
@@ -33,7 +33,6 @@ describe('Testa os componente da tela de Login', () => {
     userEvent.type(inputPassword, senha);
     expect(submitButton).not.toBeDisabled();
     userEvent.click(submitButton);
-    // history.push('/foods');
     expect(history.location.pathname).toBe('/foods');
   });
 });
