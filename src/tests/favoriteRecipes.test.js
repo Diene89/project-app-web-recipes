@@ -3,37 +3,38 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from '../helper';
 import App from '../App';
-import fetchMock from '../../cypress/mocks/fetch';
+import fetch from './mocks/fetch';
 
+const linkCopied = 'http://localhost:3000/drinks/14588';
+beforeEach(() => {
+  global.fetch = jest.fn(fetch);
+  window.navigator.clipboard = {
+    readText: jest.fn(() => Promise.resolve(linkCopied)),
+    writeText: jest.fn((text) => Promise.resolve(text)),
+  };
+  const favoriteRecipes = [
+    {
+      alcoholicOrNot: '',
+      category: 'Side',
+      id: '52977',
+      image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+      name: 'Corba',
+      nationality: 'Turkish',
+      type: 'food',
+    },
+    {
+      alcoholicOrNot: 'Alcoholic',
+      category: 'Shake',
+      id: '14588',
+      image: 'https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323.jpg',
+      name: 'FloridaBushwacker',
+      nationality: '',
+      type: 'drink',
+    },
+  ];
+  window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+});
 describe('Tela de Receitas favoritas', () => {
-  beforeEach(() => {
-    global.fetch = jest.fn(fetchMock);
-    global.navigator.clipboard = {
-      writeText: jest.fn(),
-    };
-    const favoriteRecipes = [
-      {
-        alcoholicOrNot: '',
-        category: 'Side',
-        id: '52977',
-        image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
-        name: 'Corba',
-        nationality: 'Turkish',
-        type: 'food',
-      },
-      {
-        alcoholicOrNot: 'Alcoholic',
-        category: 'Shake',
-        id: '14588',
-        image: 'https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323.jpg',
-        name: 'FloridaBushwacker',
-        nationality: '',
-        type: 'drink',
-      },
-    ];
-    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  });
-
   test('verifica se todos os componentes estão presentes e se é possível desfavoritar',
     async () => {
       const { history } = renderWithRouter(<App />);
@@ -77,14 +78,11 @@ describe('Tela de Receitas favoritas', () => {
     expect(nameRecipe0).toContainHTML('Corba');
     expect(nameRecipe1).toContainHTML('FloridaBushwacker');
 
-    userEvent.click(shareButton);
-    const copied = await screen.findByText('Link copiado!');
-    expect(copied).toContainHTML('Link copiado!');
-
     userEvent.click(nameRecipe0);
     const recipeTitle = await screen.findByTestId('recipe-title');
-    waitForExpect(() => {
-      expect(recipeTitle).toContainHTML('Corba');
-    });
+    expect(recipeTitle).toContainHTML('Corba');
+
+    userEvent.click(shareButton);
+    expect(await navigator.clipboard.readText()).toBe(linkCopied);
   });
 });

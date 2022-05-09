@@ -6,10 +6,12 @@ import App from '../App';
 import fetch from './mocks/fetch';
 
 describe('Tela de Receitas Feitas', () => {
+  const linkCopied = 'http://localhost:3000/foods/52771';
   beforeEach(() => {
     global.fetch = jest.fn(fetch);
-    global.navigator.clipboard = {
-      writeText: jest.fn(),
+    window.navigator.clipboard = {
+      readText: jest.fn(() => Promise.resolve(linkCopied)),
+      writeText: jest.fn((text) => Promise.resolve(text)),
     };
     const doneRecipes = [
       {
@@ -92,10 +94,6 @@ describe('Tela de Receitas Feitas', () => {
       expect(nameRecipe1).toContainHTML('Aquamarine');
 
       userEvent.click(shareRecipe0);
-      // const copied = screen.findAllByRole('Link copied!');
-      expect(navigator.clipboard).toHaveBeenCalledWith('Link copied!');
-
-      // userEvent.click(nameRecipe0);
-      // waitForExpect(() => { (nameRecipe0).toContainHTML('SpicyArrabiataPenne'); });
+      expect(await navigator.clipboard.readText()).toBe(linkCopied);
     });
 });
