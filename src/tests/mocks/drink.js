@@ -52,6 +52,8 @@ const drink = {
       strImageAttribution: null,
       strCreativeCommonsConfirmed: 'No',
       dateModified: '2016-07-18 22:06:00',
-    }] };
+    },
+  ],
+};
 
 export default drink;

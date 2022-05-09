@@ -17,8 +17,8 @@ describe('Testa a tela de explorar', () => {
   test('Verifica se os botões de redirecionar existem', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/explore');
-    screen.findByTestId('explore-foods');
-    screen.findByTestId('explore-drinks');
+    await screen.findByTestId('explore-foods');
+    await screen.findByTestId('explore-drinks');
   });
 });
 

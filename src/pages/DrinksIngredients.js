@@ -22,7 +22,6 @@ function DrinksIngredients(props) {
   useEffect(() => {
     const getIngredients = async () => {
       const results = await getIngredientsDrinksAPI();
-      console.log(results);
       setIngredientsList(results.drinks);
     };
     getIngredients();

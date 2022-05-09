@@ -15,20 +15,20 @@ function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
           className="image-card"
           src={ imgSrc }
           alt="foto da receita"
-          data-testId={ testIdImg }
+          data-testid={ testIdImg }
         />
       </Link>
-      <span data-testId={ testIdCategory }>
+      <span data-testid={ testIdCategory }>
         {type === 'food'
           ? `${nationality} - ${categoryName}`
           : alcoholicOrNot }
       </span>
       <Link to={ detailPage }>
-        <span data-testId={ testIdName }>{nameRecipe}</span>
+        <span data-testid={ testIdName }>{nameRecipe}</span>
       </Link>
       <button
         type="button"
-        data-testId={ testIdShare }
+        data-testid={ testIdShare }
         src={ shareIcon }
         onClick={ toShare }
       >
@@ -37,7 +37,7 @@ function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
       </button>
       <button
         type="button"
-        data-testId={ testIdFavoriteBtn }
+        data-testid={ testIdFavoriteBtn }
         src={ blackHeartIcon }
         onClick={ notFavorite }
       >
