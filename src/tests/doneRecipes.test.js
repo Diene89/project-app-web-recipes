@@ -5,41 +5,42 @@ import renderWithRouter from '../helper';
 import App from '../App';
 import fetch from './mocks/fetch';
 
-describe('Tela de Receitas Feitas', () => {
-  const linkCopied = 'http://localhost:3000/foods/52771';
-  beforeEach(() => {
-    global.fetch = jest.fn(fetch);
-    window.navigator.clipboard = {
-      readText: jest.fn(() => Promise.resolve(linkCopied)),
-      writeText: jest.fn((text) => Promise.resolve(text)),
-    };
-    const doneRecipes = [
-      {
-        id: '52771',
-        type: 'food',
-        nationality: 'Italian',
-        category: 'Vegetarian',
-        alcoholicOrNot: '',
-        name: 'SpicyArrabiataPenne',
-        image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-        doneDate: '23/06/2020',
-        tags: ['Pasta', 'Curry'],
-      },
-      {
-        id: '178319',
-        type: 'drink',
-        nationality: '',
-        category: 'Cocktail',
-        alcoholicOrNot: 'Alcoholic',
-        name: 'Aquamarine',
-        image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-        doneDate: '23/06/2020',
-        tags: [],
-      },
-    ];
-    window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
-  });
+const linkCopied0 = 'http://localhost:3000/foods/52771';
+const linkCopied1 = 'http://localhost:3000/drinks/178319';
+beforeEach(() => {
+  global.fetch = jest.fn(fetch);
+  window.navigator.clipboard = {
+    readText: jest.fn(() => Promise.resolve(linkCopied)),
+    writeText: jest.fn((text) => Promise.resolve(text)),
+  };
+  const doneRecipes = [
+    {
+      id: '52771',
+      type: 'food',
+      nationality: 'Italian',
+      category: 'Vegetarian',
+      alcoholicOrNot: '',
+      name: 'SpicyArrabiataPenne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '23/06/2020',
+      tags: ['Pasta', 'Curry'],
+    },
+    {
+      id: '178319',
+      type: 'drink',
+      nationality: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: '23/06/2020',
+      tags: [],
+    },
+  ];
+  window.localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+});
 
+describe('Tela de Receitas Feitas', () => {
   test('verifica se todos os componentes e data-testids estão presentes', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/done-recipes');
@@ -94,6 +95,9 @@ describe('Tela de Receitas Feitas', () => {
       expect(nameRecipe1).toContainHTML('Aquamarine');
 
       userEvent.click(shareRecipe0);
-      expect(await navigator.clipboard.readText()).toBe(linkCopied);
+      expect(await navigator.clipboard.readText()).toBe(linkCopied0);
+
+      userEvent.click(shareRecipe1);
+      expect(await navigator.clipboard.readText()).toBe(linkCopied1);
     });
 });
