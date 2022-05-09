@@ -5,8 +5,7 @@ import renderWithRouter from '../helper';
 import App from '../App';
 import fetch from './mocks/fetch';
 
-const linkCopied0 = 'http://localhost:3000/foods/52771';
-const linkCopied1 = 'http://localhost:3000/drinks/178319';
+const linkCopied = 'http://localhost:3000/foods/52771';
 beforeEach(() => {
   global.fetch = jest.fn(fetch);
   window.navigator.clipboard = {
@@ -81,7 +80,6 @@ describe('Tela de Receitas Feitas', () => {
       const foodButton = await screen.findByTestId('filter-by-food-btn');
       const drinkButton = await screen.findByTestId('filter-by-drink-btn');
       const nameRecipe0 = await screen.findByTestId('0-horizontal-name');
-      const shareRecipe0 = await screen.findByTestId('0-horizontal-share-btn');
       const nameRecipe1 = await screen.findByTestId('1-horizontal-name');
 
       userEvent.click(foodButton);
@@ -94,10 +92,7 @@ describe('Tela de Receitas Feitas', () => {
       expect(nameRecipe0).toContainHTML('SpicyArrabiataPenne');
       expect(nameRecipe1).toContainHTML('Aquamarine');
 
-      userEvent.click(shareRecipe0);
-      expect(await navigator.clipboard.readText()).toBe(linkCopied0);
-
-      userEvent.click(shareRecipe1);
-      expect(await navigator.clipboard.readText()).toBe(linkCopied1);
+      userEvent.click(shareRecipe);
+      expect(await navigator.clipboard.readText()).toBe(linkCopied);
     });
 });
