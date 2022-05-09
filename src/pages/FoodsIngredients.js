@@ -22,7 +22,6 @@ function FoodsIngredients(props) {
   useEffect(() => {
     const getIngredients = async () => {
       const results = await getIngredientsFoodsAPI();
-      console.log(results);
       setIngredientsList(results.meals);
     };
     getIngredients();
@@ -58,7 +57,7 @@ function FoodsIngredients(props) {
 }
 
 FoodsIngredients.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default FoodsIngredients;

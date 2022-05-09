@@ -38,11 +38,19 @@
 }
 
 .footer {
-  background-color: blueviolet;
+  align-items: center;
+  background-color: rgb(11, 133, 7);
   bottom: 0;
+  display: flex;
+  height: 60px;
+  justify-content: space-evenly;
+  left: 0;
   position: fixed;
-  text-align: center;
   width: 100%;
+}
+
+.footer > a {
+  padding: 10px;
 }
 
 .login {
@@ -112,6 +120,83 @@
   color: rgb(24, 24, 24);
   opacity: 40%;
   transition: 600ms;
+}
+
+header {
+  align-items: center;
+  background-color: rgb(255, 166, 0);
+  color: black;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  left: 0;
+  padding: 5px;
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+}
+
+.header-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-radio-butto {
+  border: 0.001px;
+  height: 1.3em;
+}
+
+.title-name {
+  color: white;
+}
+
+.category-filter-btn {
+  display: flex;
+  font-family: Poppins , sans-serif;
+  font-size: 13pt;
+  padding: 2px 2%;
+}
+
+.MainFood {
+  align-items: center;
+  background: white;
+  color: #464646;
+  display: flex;
+  flex-flow: row wrap;
+  flex-wrap: wrap;
+  font-family: sans-serif;
+  justify-content: space-evenly;
+}
+
+.section-recipe-card > a {
+  align-content: space-between;
+  background-color: white;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  box-shadow: 1px 5px 3px rgb(185, 185, 185);
+  font-size: 14pt;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 30%;
+}
+
+.section-recipe-card > a img {
+  width: 100%;
+}
+
+.section-recipe-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.div-recipes {
+  margin-bottom: 70px;
 }
 
 @keyframes shake {
