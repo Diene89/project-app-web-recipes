@@ -5,12 +5,12 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../services/renderPath';
 import fetchMock from '../../cypress/mocks/fetch';
-import mealCategories from '../../cypress/mocks/mealCategories';
-import meals from '../../cypress/mocks/meals';
+import drinkCategories from '../../cypress/mocks/drinkCategories';
+import Drinks from '../../cypress/mocks/drinks';
 
-const allFilterUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const allFilterUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const maxCategories = 5;
-const categories = mealCategories.meals.map((cat) => cat.strCategory)
+const categories = drinkCategories.drinks.map((cat) => cat.strCategory)
   .slice(0, maxCategories)
   .concat('All');
 const secondCard = '1-card-name';
@@ -22,23 +22,23 @@ const cardChecker = (recipes) => {
     const img = screen.getByTestId(`${index}-card-img`);
     const name = screen.getByTestId(`${index}-card-name`);
     expect(card).toBeInTheDocument();
-    expect(card).toHaveTextContent(recipe.strMeal);
+    expect(card).toHaveTextContent(recipe.strDrink);
     expect(img).toBeInTheDocument();
-    expect(img).toHaveProperty('src', recipe.strMealThumb);
+    expect(img).toHaveProperty('src', recipe.strDrinkThumb);
     expect(name).toBeInTheDocument();
-    expect(name).toHaveTextContent(recipe.strMeal);
+    expect(name).toHaveTextContent(recipe.strDrink);
   });
 };
 
-const filterTest = (category, firstCardName) => {
+const filterTest = (category, secondCardName) => {
   const firstCard = screen.getByTestId('0-card-name');
-  expect(firstCard).toHaveTextContent(firstCardName);
+  expect(firstCard).toHaveTextContent(secondCardName);
   if (category === 'onlyFirstCard') return;
   if (category === null) {
     expect(fetch).toHaveBeenCalledWith(allFilterUrl);
     return;
   }
-  expect(fetch).toHaveBeenCalledWith(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  expect(fetch).toHaveBeenCalledWith(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
 };
 
 describe.only('Testa componentes da tela de comidas principal', () => {
@@ -49,7 +49,7 @@ describe.only('Testa componentes da tela de comidas principal', () => {
 
   it('Testa se clicar no botão de pesquisa funciona', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/foods');
+    history.push('/drinks');
     const toggle = screen.getByTestId(searchId);
     userEvent.click(toggle);
     const radios = screen.getAllByTestId(radioId);
@@ -62,13 +62,13 @@ describe.only('Testa componentes da tela de comidas principal', () => {
 
   it('Testa se escrever no input interfere em clicar nos radios', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/foods');
+    history.push('/drinks');
     const toggle = screen.getByTestId(searchId);
     userEvent.click(toggle);
     const radios = screen.getAllByTestId(radioId);
     const input = screen.getByTestId(inputId);
-    userEvent.type(input, 'Chicken');
-    expect(input).toHaveValue('Chicken');
+    userEvent.type(input, 'B-52');
+    expect(input).toHaveValue('B-52');
     radios.forEach((radio) => {
       userEvent.click(radio);
       expect(radio).toBeChecked();
@@ -78,7 +78,7 @@ describe.only('Testa componentes da tela de comidas principal', () => {
   it('Testa se buscar com mais de um caracter gera um alert', () => {
     window.alert = jest.fn();
     const { history } = renderWithRouter(<App />);
-    history.push('/foods');
+    history.push('/drinks');
     const toggle = screen.getByTestId(searchId);
     userEvent.click(toggle);
     const input = screen.getByTestId(inputId);
@@ -96,30 +96,31 @@ describe.only('Testa componentes da tela de comidas principal', () => {
 
   it('Verifica se os endpoints corretos são utilizados', async () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/foods');
+    history.push('/drinks');
     await screen.findByTestId('0-recipe-card');
     expect(fetch).toHaveBeenCalledTimes(2);
     expect(fetch).toHaveBeenCalledWith(allFilterUrl);
-    expect(fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   });
 
   it('Testa se os cards estão presentes e com as dados corretos', async () => {
     await act(async () => {
       const { history } = renderWithRouter(<App />);
-      history.push('/foods');
+      history.push('/drinks');
     });
     const firstElement = screen.getByTestId(secondCard);
-    expect(firstElement).toHaveTextContent(meals.meals[1].strMeal);
-    cardChecker(meals.meals);
+    expect(firstElement).toHaveTextContent(Drinks.drinks[1].strDrink);
+    cardChecker(Drinks.drinks);
   });
 
   it('Verifica se todos os filtros estão presentes', async () => {
     await act(async () => {
       const { history } = renderWithRouter(<App />);
-      history.push('/foods');
+      history.push('/drinks');
     });
     categories.forEach((cat) => {
       const categorieBtn = screen.getByTestId(`${cat}-category-filter`);
+
       expect(categorieBtn).toBeInTheDocument();
       expect(categorieBtn).toHaveTextContent(cat);
     });
@@ -127,9 +128,9 @@ describe.only('Testa componentes da tela de comidas principal', () => {
 
   it('Teste - Clicar no botão de filtro o conteudo da pagina muda', async () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/foods');
+    history.push('/drinks');
     const memory = (await screen.findByTestId(secondCard)).innerHTML;
-    const testButton = await screen.findByTestId('Beef-category-filter');
+    const testButton = await screen.findByTestId('Cocktail-category-filter');
     userEvent.click(testButton);
     const newMemory = (await screen.findByTestId(secondCard)).innerHTML;
     expect(memory).not.toBe(newMemory);
@@ -145,23 +146,23 @@ describe.only('Testa componentes da tela de comidas principal', () => {
     async () => {
       await act(async () => {
         const { history } = renderWithRouter(<App />);
-        history.push('/foods');
+        history.push('/drinks');
       });
-      const categoryTest = await screen.findByTestId('Beef-category-filter');
+      const categoryTest = await screen.findByTestId('Cocktail-category-filter');
       await act(async () => userEvent.click(categoryTest));
-      filterTest('Beef', 'Beef and Mustard Pie');
+      filterTest('Cocktail', '57 Chevy with a White License Plate');
       await act(async () => userEvent.click(categoryTest));
-      filterTest('onlyFirstCard', 'Corba');
+      filterTest('onlyFirstCard', 'GG');
     });
 
   it('Testa se clicar no card da receita redireciona o usuário', async () => {
     await act(async () => {
       const { history } = renderWithRouter(<App />);
-      history.push('/foods');
+      history.push('/drinks');
       const memory = (await screen.findByTestId('0-recipe-card'));
       userEvent.click(memory);
-      const id = await meals.meals[0].idMeal;
-      expect(history.location.pathname).toBe(`/foods/${id}`);
+      const id = await Drinks.drinks[0].idDrink;
+      expect(history.location.pathname).toBe(`/drinks/${id}`);
     });
   });
 });
