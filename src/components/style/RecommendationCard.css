@@ -1,3 +1,11 @@
+.RecommendationCard {
+  text-align: center;
+}
+
 .RecommendationCard img {
-  width: 200px;
+  width: 80%;
+}
+
+.RecommendationCard a {
+  color: white;
 }
