@@ -9,3 +9,16 @@
   position: fixed;
   right: 0;
 }
+
+.RecipeDetails .instructions {
+  background-color: rgb(255, 166, 0);
+  border-radius: 20px;
+  font-size: 18px;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.RecipeDetails .instructions h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}

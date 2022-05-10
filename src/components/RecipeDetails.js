@@ -62,8 +62,10 @@ function RecipeDetails({ recipe, history }) {
 
       <RecipeIngredients recipe={ recipe } />
 
-      <h2>Instructions</h2>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <div className="instructions">
+        <h2>Instructions</h2>
+        <p data-testid="instructions">{recipe.strInstructions}</p>
+      </div>
 
       {renderVideo()}
 
