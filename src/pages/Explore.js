@@ -40,7 +40,7 @@ function Explore(props) {
 }
 
 Explore.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default Explore;

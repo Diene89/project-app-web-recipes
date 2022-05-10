@@ -14,7 +14,7 @@ function FavoriteRecipes() {
   }
 
   function copyShare(url, id) {
-    if (global.alert('Link copied!')) {
+    if (url) {
       copy(url);
       setIdCopied(id);
     }
