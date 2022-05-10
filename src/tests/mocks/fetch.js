@@ -5,7 +5,6 @@ import drinks from './drinks';
 import mealIngredients from './mealIngredients';
 import areas from './areas';
 import drinkIngredients from './drinkIngredients';
-import drink from './drink';
 import mealCategories from './mealCategories';
 import chickenMeals from './chickenMeals';
 import lightRumDrinks from './lightRumDrinks';
@@ -63,7 +62,6 @@ const fetch = (url) => Promise.resolve({
   status: 200,
   ok: true,
   json: () => {
-
     console.log('URL', url);
     if (url.includes('themealdb')) return theMealDb(url);
     if (url.includes('thecocktaildb')) return theCocktailDb(url);
