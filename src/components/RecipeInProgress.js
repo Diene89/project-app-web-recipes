@@ -9,6 +9,7 @@ import {
   saveDoneRecipe,
   saveInProgressRecipe,
 } from '../helpers/localStorage';
+import './style/RecipeInProgress.css';
 
 function RecipeInProgress({ recipe, history }) {
   const isDrinkRecipe = recipe.strDrink !== undefined;
@@ -93,7 +94,7 @@ function RecipeInProgress({ recipe, history }) {
 
       <button
         type="button"
-        className="start-recipe-btn"
+        className="finish-recipe-btn"
         data-testid="finish-recipe-btn"
         onClick={ redirectToDoneRecipes }
         disabled={ ingredientNameAndMeasure.length !== recipeIngredients.length }
