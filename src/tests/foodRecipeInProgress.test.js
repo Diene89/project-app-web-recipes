@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helper/renderWithRouter';
 import App from '../App';
 import fetch from './mocks/fetch';
+import food from './mocks/meal';
 
 const foodInProgressRoute = '/foods/52977/in-progress';
 const favoriteRecipes = '/favorite-recipes';
 
-const linkCopied = 'http://localhost:3000/foods/52771';
+const linkCopied = 'http://localhost:3000/foods/52977';
 beforeEach(() => {
   global.fetch = jest.fn(fetch);
   window.navigator.clipboard = {
@@ -81,7 +82,6 @@ describe('Verifica o funcionamento do botão de finalizar receita', () => {
   test(`Clica no botão de finalizar receita e verifica 
       se o redirecionamento ocorre`, async () => {
     const { history } = renderWithRouter(<App />);
-    // const { idMeal } = food.meals[0];
     history.push(foodInProgressRoute);
     const finishRecipeBtn = await screen.findByTestId('finish-recipe-btn');
     expect(finishRecipeBtn).toHaveAttribute('disabled');
