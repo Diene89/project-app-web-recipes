@@ -53,7 +53,7 @@ function RecipeInProgress({ recipe, history }) {
 
   function renderIngredientNameAndMeasureWithCheckbox() {
     return (
-      <>
+      <div className="RecipeIngredients">
         <h2>Ingredients</h2>
         <ul>
           {
@@ -76,7 +76,7 @@ function RecipeInProgress({ recipe, history }) {
             ))
           }
         </ul>
-      </>
+      </div>
     );
   }
 
