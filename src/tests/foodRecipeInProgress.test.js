@@ -95,3 +95,17 @@ describe('Verifica o funcionamento do botão de finalizar receita', () => {
     expect(pathname).toContain('/done-recipes');
   });
 });
+
+describe('Verifica os ingredientes utilizados salvos no LocalStorage', () => {
+  test(`Clica eu ingrediente e verifica 
+      se é registrado no LocalStorage`, async () => {
+    const { history } = renderWithRouter(<App />);
+    const { idMeal } = food.meals[0];
+    history.push(foodInProgressRoute);
+    const firstIngredient = await screen.findByLabelText('Lentils - 1 cup');
+    userEvent.click(firstIngredient);
+    const ingredInLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const numberOfIngredientsRemainig = 12;
+    expect(ingredInLocalStorage.meals[idMeal]).toHaveLength(numberOfIngredientsRemainig);
+  });
+});
