@@ -70,7 +70,7 @@ function RecipeDetails({ recipe, history }) {
       {recommendation.length && (
         <RecommendationCardCarousel
           recommendation={ recommendation }
-          DrinkRecommendation={ !isDrinkRecipe }
+          isDrinkRecommendation={ !isDrinkRecipe }
           maxRecommendedCards={ 6 }
         />
       )}
