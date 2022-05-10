@@ -138,7 +138,6 @@ describe.only('Testa componentes da tela de comidas principal', () => {
     const testButton2 = await screen.findByTestId('All-category-filter');
     userEvent.click(testButton2);
     const newMemory2 = (await screen.findByTestId(secondCard)).innerHTML;
-    console.log(memory2, newMemory2);
     expect(memory2).not.toBe(newMemory2);
   });
 

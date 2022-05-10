@@ -92,7 +92,8 @@ describe('Tela de Receitas Feitas', () => {
       expect(nameRecipe0).toContainHTML('SpicyArrabiataPenne');
       expect(nameRecipe1).toContainHTML('Aquamarine');
 
-      userEvent.click(shareRecipe);
+      const shareRecipe0 = await screen.findByTestId('0-horizontal-share-btn');
+      userEvent.click(shareRecipe0);
       expect(await navigator.clipboard.readText()).toBe(linkCopied);
     });
 });

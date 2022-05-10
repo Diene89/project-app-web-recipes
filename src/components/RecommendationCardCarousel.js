@@ -10,7 +10,6 @@ function RecommendationCardCarousel({
   maxRecommendedCards,
 }) {
   function getPairOfRecommendedCards(start) {
-    console.log(recommendation);
     return (
       <div className="carouselItem">
         {recommendation[start] && (
