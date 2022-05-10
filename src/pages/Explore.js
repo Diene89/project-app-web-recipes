@@ -2,6 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import './styles/Explore.css';
+import './styles/exploreButtons.css';
 
 function Explore(props) {
   function goToXploreFoods() {
@@ -15,26 +17,27 @@ function Explore(props) {
   }
 
   return (
-    <main>
+    <main className="Explore">
       <Header title="Explore" showSearchIcon={ false } />
-      <button
-        type="button"
-        name="Explore Foods"
-        data-testid="explore-foods"
-        onClick={ goToXploreFoods }
-      >
-        Explore Foods
-      </button>
-      <button
-        type="button"
-        name="Explore Drinks"
-        data-testid="explore-drinks"
-        onClick={ goToXploreDrinks }
-      >
-        Explore Drinks
-      </button>
+      <div className="explore-buttons">
+        <button
+          type="button"
+          name="Explore Foods"
+          data-testid="explore-foods"
+          onClick={ goToXploreFoods }
+        >
+          Explore Foods
+        </button>
+        <button
+          type="button"
+          name="Explore Drinks"
+          data-testid="explore-drinks"
+          onClick={ goToXploreDrinks }
+        >
+          Explore Drinks
+        </button>
+      </div>
       <Footer />
-      Explore
     </main>
   );
 }
