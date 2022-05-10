@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helper/renderWithRouter';
 import App from '../App';
 import fetch from './mocks/fetch';
+import drink from './mocks/drink';
 
 const detailsDrinksRoute = '/drinks/15997';
 const favoriteRecipes = '/favorite-recipes';
@@ -89,5 +90,18 @@ describe('Verifica o funcionamento do botão de favoritar', () => {
     userEvent.click(favoriteBtn);
     history.push(favoriteRecipes);
     expect(foodTitle).not.toBeInTheDocument();
+  });
+});
+
+describe('Verifica o direcionamento para receita em progresso', () => {
+  test(`Clica no botão de iniciar receita e verifica 
+      se o redirecionamento ocorre`, async () => {
+    const { history } = renderWithRouter(<App />);
+    const { idDrink } = drink.drinks[0];
+    history.push(detailsDrinksRoute);
+    const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
+    userEvent.click(startRecipeBtn);
+    const { location: { pathname } } = history;
+    expect(pathname).toContain(`/drinks/${idDrink}/in-progress`);
   });
 });
