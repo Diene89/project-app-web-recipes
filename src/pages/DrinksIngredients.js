@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { getIngredientsDrinksAPI } from '../services/RecipesAPI';
 import IngredientCard from '../components/IngredientCard';
 import AppContext from '../context/AppContext';
+import './styles/ExploreByIngredient.css';
 
 function DrinksIngredients(props) {
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -28,9 +29,9 @@ function DrinksIngredients(props) {
   }, []);
 
   return (
-    <main>
+    <main className="ExploreByIngredient">
       <Header title="Explore Ingredients" showSearchIcon={ false } />
-      <section className="section">
+      <section className="ingredients">
         {ingredientsList && ingredientsList
           .filter((recipe, index) => index < ingredientsLimit)
           .map((ingredient, index) => (
