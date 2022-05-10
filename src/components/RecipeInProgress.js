@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style/RecipeDetails.css';
 import RecipeHeader from './RecipeHeader';
-import { getInProgressRecipe, saveInProgressRecipe } from '../helpers/localStorage';
+import {
+  getInProgressRecipe,
+  isDoneRecipe,
+  removeDoneRecipe,
+  saveDoneRecipe,
+  saveInProgressRecipe,
+} from '../helpers/localStorage';
 
 function RecipeInProgress({ recipe, history }) {
   const isDrinkRecipe = recipe.strDrink !== undefined;
@@ -27,13 +33,20 @@ function RecipeInProgress({ recipe, history }) {
   }, [recipe]);
 
   function redirectToDoneRecipes() {
+    if (!isDoneRecipe(recipeID, isDrinkRecipe)) saveDoneRecipe(recipe);
     history.push('/done-recipes');
   }
 
   function handleCheckbox({ target: { value, checked } }) {
-    const newRecipeIngredients = checked
-      ? recipeIngredients.concat(Number(value))
-      : recipeIngredients.filter((id) => id !== Number(value));
+    let newRecipeIngredients;
+    if (checked) {
+      newRecipeIngredients = recipeIngredients.concat(Number(value));
+    } else {
+      newRecipeIngredients = recipeIngredients.filter((id) => id !== Number(value));
+      if (recipeIngredients.length === ingredientNameAndMeasure.length) {
+        removeDoneRecipe(recipeID);
+      }
+    }
     setRecipeIngredients(newRecipeIngredients);
     saveInProgressRecipe(recipeID, isDrinkRecipe, newRecipeIngredients);
   }

@@ -5,12 +5,6 @@ function isTheSameRecipe(recipe, id, isDrinkRecipe) {
   return true;
 }
 
-function getDoneRecipe(recipeID, isDrinkRecipe) {
-  let recipes = localStorage.getItem('doneRecipes');
-  recipes = recipes ? JSON.parse(recipes) : [];
-  return recipes.find((recipe) => isTheSameRecipe(recipe, recipeID, isDrinkRecipe));
-}
-
 function getInProgressRecipes() {
   let inProgressRecipes = localStorage.getItem('inProgressRecipes');
   inProgressRecipes = inProgressRecipes
@@ -37,9 +31,8 @@ function saveInProgressRecipe(recipeID, isDrinkRecipe, recipeIngredients) {
 }
 
 function getFavoriteRecipes() {
-  let favoriteRecipes = localStorage.getItem('favoriteRecipes');
-  favoriteRecipes = favoriteRecipes ? JSON.parse(favoriteRecipes) : [];
-  return favoriteRecipes;
+  const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+  return favoriteRecipes ? JSON.parse(favoriteRecipes) : [];
 }
 
 function isFavoriteRecipe(recipeID, isDrinkRecipe) {
@@ -76,6 +69,54 @@ function removeRecipeFromFavorites(recipeID) {
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 }
 
+function getDoneRecipes() {
+  const recipes = localStorage.getItem('doneRecipes');
+  return recipes ? JSON.parse(recipes) : [];
+}
+
+function getDoneRecipe(recipeID, isDrinkRecipe) {
+  const recipes = getDoneRecipes();
+  return recipes.find((recipe) => isTheSameRecipe(recipe, recipeID, isDrinkRecipe));
+}
+
+function isDoneRecipe(recipeID, isDrinkRecipe) {
+  return getDoneRecipes()
+    .some((recipe) => isTheSameRecipe(recipe, recipeID, isDrinkRecipe));
+}
+
+function saveDoneRecipe(recipe) {
+  const isDrinkRecipe = recipe.strDrink !== undefined;
+  const id = isDrinkRecipe ? recipe.idDrink : recipe.idMeal;
+  const type = isDrinkRecipe ? 'drink' : 'food';
+  const nationality = recipe.strArea ? recipe.strArea : '';
+  const category = recipe.strCategory ? recipe.strCategory : '';
+  const alcoholicOrNot = recipe.strAlcoholic ? recipe.strAlcoholic : '';
+  const name = isDrinkRecipe ? recipe.strDrink : recipe.strMeal;
+  const image = isDrinkRecipe ? recipe.strDrinkThumb : recipe.strMealThumb;
+  const doneDate = new Date().toLocaleDateString();
+  const tags = recipe.strTags;
+
+  const doneRecipes = getDoneRecipes();
+  doneRecipes.push({
+    id,
+    type,
+    nationality,
+    category,
+    alcoholicOrNot,
+    name,
+    image,
+    doneDate,
+    tags: tags ? tags.split(',') : [],
+  });
+
+  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+}
+
+function removeDoneRecipe(recipeID) {
+  const doneRecipes = getDoneRecipes().filter(({ id }) => id !== recipeID);
+  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+}
+
 export {
   getDoneRecipe,
   getInProgressRecipe,
@@ -84,4 +125,7 @@ export {
   isFavoriteRecipe,
   saveRecipeAsFavorite,
   removeRecipeFromFavorites,
+  saveDoneRecipe,
+  isDoneRecipe,
+  removeDoneRecipe,
 };
