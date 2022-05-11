@@ -4,8 +4,15 @@
 }
 
 .RecipeDetails .start-recipe-btn {
+  background-color: green;
+  border: none;
+  border-radius: 10px;
   bottom: 0;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
   left: 0;
+  margin: 10px;
   position: fixed;
   right: 0;
 }
