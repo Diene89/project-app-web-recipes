@@ -1,4 +1,6 @@
 .RecipeHeader {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   text-align: center;
 }
 
