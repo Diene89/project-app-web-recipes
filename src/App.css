@@ -176,11 +176,12 @@ header {
   border: 1px solid rgb(185, 185, 185);
   border-radius: 10px;
   box-shadow: 1px 5px 3px rgb(185, 185, 185);
-  font-size: 14pt;
+  font-size: 12pt;
+  color: #2e5172;
   justify-content: space-around;
   margin-bottom: 10px;
   text-align: center;
-  width: 30%;
+  width: 31%;
 }
 
 .section-recipe-card > a img {
