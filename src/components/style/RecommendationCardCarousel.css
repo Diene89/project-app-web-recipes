@@ -1,5 +1,10 @@
 .RecommendationCardCarousel {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(255, 166, 0);
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.RecommendationCardCarousel .carousel {
   padding: 10px 5px 30px;
 }
 
