@@ -11,8 +11,8 @@ function Profile(props) {
   return (
     <main className="Profile">
       <Header title="Profile" showSearchIcon={ false } />
-      <section>
-        <p data-testid="profile-email" className="profile-email">{email}</p>
+      <p data-testid="profile-email" className="profile-email">{email}</p>
+      <section className="redirect-buttons">
         <button
           type="button"
           className="profile-done-btn"

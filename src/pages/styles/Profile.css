@@ -1,14 +1,14 @@
-.Profile section {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
 .Profile .profile-email {
   font-size: 22px;
   font-weight: 600;
   margin: 20px;
+  text-align: center;
+}
+
+.Profile .redirect-buttons {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
 }
 
 .Profile .profile-done-btn {
