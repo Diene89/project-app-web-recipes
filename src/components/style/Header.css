@@ -1,0 +1,25 @@
+.Header * {
+  margin: 0;
+  padding: 0;
+}
+
+.Header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+
+.Header .title-name {
+  color: white;
+}
+
+.Header .section-header button {
+  background-color: transparent;
+  border: none;
+}
+
+.Header .section-header.hide-search-icon {
+  opacity: 0;
+  pointer-events: none;
+}

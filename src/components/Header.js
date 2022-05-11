@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
+import './style/Header.css';
 
 function Header({ title, showSearchIcon, pageOfDrinks }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -20,8 +21,9 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
   }
 
   function renderSearchIcon() {
+    const hideSearchIcon = showSearchIcon ? '' : ' hide-search-icon';
     return (
-      <section className="section-header">
+      <section className={ `section-header${hideSearchIcon}` }>
         <button
           type="button"
           onClick={
@@ -33,12 +35,10 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
           <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
         </button>
       </section>
-
     );
   }
 
   function redirect() {
-    /* const recipesReceived = pageOfDrinks ? recipes.drinks : recipes.meals; */
     const recipesReceived = recipes;
     if (recipesReceived && recipesReceived.length === 1) {
       const url = pageOfDrinks
@@ -103,27 +103,22 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
             Search
           </button>
         </div>
-
       </section>
     );
   }
 
   return (
-    <header className="header-profile">
+    <header className="Header">
       <Link to="/profile">
-        <button type="button">
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profileIcon"
-          />
-        </button>
-
+        <img
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="profileIcon"
+        />
       </Link>
       <h2 className="title-name" data-testid="page-title">{title}</h2>
       {
-        showSearchIcon
-        && renderSearchIcon()
+        renderSearchIcon()
       }
       {
         showSearchInput

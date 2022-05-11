@@ -134,22 +134,9 @@ header {
   width: 100%;
 }
 
-.section-header {
-  display: flex;
-}
-
-.header-profile {
-  display: flex;
-  justify-content: space-between;
-}
-
 .header-radio-butto {
   border: 0.001px;
   height: 1.3em;
-}
-
-.title-name {
-  color: white;
 }
 
 .category-filter-btn {
