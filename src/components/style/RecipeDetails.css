@@ -18,7 +18,22 @@
   padding: 10px;
 }
 
-.RecipeDetails .instructions h2 {
-  margin-bottom: 15px;
+.RecipeDetails h2 {
+  margin-bottom: 10px;
   text-align: center;
+}
+
+.RecipeDetails .video {
+  align-items: center;
+  background-color: rgb(255, 166, 0);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+.RecipeDetails .video iframe {
+  height: 185px;
+  width: 330px;
 }

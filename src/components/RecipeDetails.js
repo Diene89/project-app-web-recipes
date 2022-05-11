@@ -29,12 +29,10 @@ function RecipeDetails({ recipe, history }) {
     return isDrinkRecipe
       ? null
       : (
-        <>
+        <div className="video">
           <h2>Video</h2>
           <iframe
             data-testid="video"
-            width="560"
-            height="315"
             src={ `https://www.youtube.com/embed/${videoID}` }
             title="YouTube video player"
             frameBorder="0"
@@ -42,7 +40,7 @@ function RecipeDetails({ recipe, history }) {
               encrypted-media; gyroscope; picture-in-picture` }
             allowFullScreen
           />
-        </>
+        </div>
       );
   }
 
