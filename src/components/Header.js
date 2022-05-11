@@ -24,16 +24,18 @@ function Header({ title, showSearchIcon, pageOfDrinks }) {
     const hideSearchIcon = showSearchIcon ? '' : ' hide-search-icon';
     return (
       <section className={ `section-header${hideSearchIcon}` }>
-        <button
-          type="button"
-          onClick={
-            () => (setShowSearchInput(
-              (currentShowSearchInput) => !currentShowSearchInput,
-            ))
-          }
-        >
-          <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
-        </button>
+        {showSearchIcon && (
+          <button
+            type="button"
+            onClick={
+              () => (setShowSearchInput(
+                (currentShowSearchInput) => !currentShowSearchInput,
+              ))
+            }
+          >
+            <img data-testid="search-top-btn" src={ searchIcon } alt="searchIcon" />
+          </button>
+        )}
       </section>
     );
   }
