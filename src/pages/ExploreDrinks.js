@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { randomDrinks } from '../services/RecipesAPI';
-import './styles/ExploreDrinks.css';
 import './styles/exploreButtons.css';
 
 function ExploreDrinks(props) {
@@ -19,7 +18,7 @@ function ExploreDrinks(props) {
     <section className="section-explore-drink">
       <Header title="Explore Drinks" showSearchIcon={ false } />
 
-      <section className="section-btn-explore">
+      <section>
         <div className="explore-buttons">
           <button
             type="button"

@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import './styles/Explore.css';
 import './styles/exploreButtons.css';
 
 function Explore(props) {
@@ -17,7 +16,7 @@ function Explore(props) {
   }
 
   return (
-    <main className="Explore">
+    <main>
       <Header title="Explore" showSearchIcon={ false } />
       <div className="explore-buttons">
         <button
