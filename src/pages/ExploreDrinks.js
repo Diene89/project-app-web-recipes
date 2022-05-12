@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { randomDrinks } from '../services/RecipesAPI';
-import './styles/exploreButtons.css';
+import './styles/defaultButtons.css';
 
 function ExploreDrinks(props) {
   const { history } = props;
@@ -19,7 +19,7 @@ function ExploreDrinks(props) {
       <Header title="Explore Drinks" showSearchIcon={ false } />
 
       <section>
-        <div className="explore-buttons">
+        <div className="default-buttons">
           <button
             type="button"
             data-testid="explore-by-ingredient"

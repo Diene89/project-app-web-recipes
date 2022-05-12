@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './styles/Profile.css';
+import './styles/defaultButtons.css';
 
 function Profile(props) {
   const user = localStorage.getItem('user');
@@ -12,10 +13,9 @@ function Profile(props) {
     <main className="Profile">
       <Header title="Profile" showSearchIcon={ false } />
       <p data-testid="profile-email" className="profile-email">{email}</p>
-      <section className="redirect-buttons">
+      <section className="default-buttons">
         <button
           type="button"
-          className="profile-done-btn"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/done-recipes') }
         >
@@ -23,7 +23,6 @@ function Profile(props) {
         </button>
         <button
           type="button"
-          className="profile-done-btn"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/favorite-recipes') }
         >
@@ -31,7 +30,6 @@ function Profile(props) {
         </button>
         <button
           type="button"
-          className="profile-done-btn"
           data-testid="profile-logout-btn"
           onClick={ () => { localStorage.clear(); history.push('/'); } }
         >

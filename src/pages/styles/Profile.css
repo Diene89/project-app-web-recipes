@@ -1,21 +1,7 @@
 .Profile .profile-email {
   font-size: 22px;
   font-weight: 600;
-  margin: 20px;
+  margin: 0;
+  padding: 0;
   text-align: center;
-}
-
-.Profile .redirect-buttons {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-}
-
-.Profile .profile-done-btn {
-  border: none;
-  border-radius: 10px;
-  font-size: 30px;
-  margin: 10px auto;
-  text-align: center;
-  width: 90%;
 }

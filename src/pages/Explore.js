@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import './styles/exploreButtons.css';
+import './styles/defaultButtons.css';
 
 function Explore(props) {
   function goToXploreFoods() {
@@ -18,7 +18,7 @@ function Explore(props) {
   return (
     <main>
       <Header title="Explore" showSearchIcon={ false } />
-      <div className="explore-buttons">
+      <div className="default-buttons">
         <button
           type="button"
           name="Explore Foods"
