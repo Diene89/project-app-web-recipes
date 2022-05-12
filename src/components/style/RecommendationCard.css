@@ -3,7 +3,8 @@
 }
 
 .RecommendationCard img {
-  width: 80%;
+  max-height: 115px;
+  max-width: 115px;
 }
 
 .RecommendationCard a {
