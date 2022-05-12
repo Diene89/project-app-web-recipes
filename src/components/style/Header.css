@@ -23,6 +23,7 @@
 
 .Header .title-name {
   color: white;
+  font-size: 26px;
   text-align: center;
 }
 
@@ -53,7 +54,7 @@
 }
 
 .Header .search-options.show-search-options {
-  top: 48px;
+  top: 41px;
 }
 
 .Header .search-options .search-input {
