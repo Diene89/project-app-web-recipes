@@ -1,6 +1,8 @@
 .RecipeHeader {
+  background-color: rgb(255, 166, 0);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  padding: 5px;
   text-align: center;
 }
 
