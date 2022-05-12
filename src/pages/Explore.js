@@ -16,7 +16,7 @@ function Explore(props) {
   }
 
   return (
-    <main>
+    <main className="Explore">
       <Header title="Explore" showSearchIcon={ false } />
       <div className="default-buttons">
         <button

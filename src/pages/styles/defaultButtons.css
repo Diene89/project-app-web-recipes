@@ -1,3 +1,7 @@
+.default-buttons {
+  margin-top: 150px;
+}
+
 .default-buttons button {
   background-color: green;
   border: none;
@@ -5,7 +9,8 @@
   color: white;
   display: block;
   font-size: 30px;
-  margin: 6px auto;
+  margin: 6px auto 10px;
+  padding: 5px;
   text-align: center;
   width: 90%;
 }
