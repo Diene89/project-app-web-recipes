@@ -1,0 +1,105 @@
+.Header * {
+  margin: 0;
+  padding: 0;
+}
+
+.Header {
+  transition: margin-bottom 300ms linear;
+}
+
+.Header.show-search-options {
+  margin-bottom: 140px;
+}
+
+.Header .header-section {
+  align-items: center;
+  background-color: rgb(255, 166, 0);
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.Header .title-name {
+  color: white;
+  font-size: 26px;
+  text-align: center;
+}
+
+.Header .header-search-icon {
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.Header .header-search-icon button {
+  background-color: transparent;
+  border: none;
+}
+
+.Header .header-search-icon.hide-search-icon {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.Header .search-options {
+  background-color: rgb(225, 225, 225);
+  box-shadow: 0 2px 10px black;
+  left: 0;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: -100px;
+  transition: top 300ms linear;
+}
+
+.Header .search-options.show-search-options {
+  top: 41px;
+}
+
+.Header .search-options .search-input {
+  background-color: rgb(230, 240, 230);
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 0 5px black;
+  font-size: 18px;
+  margin-bottom: 5px;
+  outline: none;
+  padding: 3px 10px;
+  width: 100%;
+}
+
+.Header .search-options .search-input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.8);
+}
+
+.Header .search-options .ingredient-search-radios {
+  display: flex;
+  font-size: 18px;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+}
+
+.Header .ingredient-search-radios label {
+  cursor: pointer;
+}
+
+.Header .ingredient-search-radios .search-radio {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.Header .search-options .search-button {
+  background-color: green;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 3px 0;
+  width: 100%;
+}
+
+.Header .search-options .search-button:active {
+  background-color: darkgreen;
+}

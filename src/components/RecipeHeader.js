@@ -9,6 +9,7 @@ import {
   removeRecipeFromFavorites,
   saveRecipeAsFavorite,
 } from '../helpers/localStorage';
+import './style/RecipeHeader.css';
 
 function RecipeHeader({ recipe }) {
   const [favoriteRecipe, setFavoriteRecipe] = useState(false);
@@ -50,14 +51,16 @@ function RecipeHeader({ recipe }) {
   }
 
   return (
-    <header>
+    <header className="RecipeHeader">
       <img
         data-testid="recipe-photo"
+        className="recipe-photo"
         src={ strRecipeThumb }
         alt={ strRecipe }
       />
       <div>
         <h1 data-testid="recipe-title">{strRecipe}</h1>
+        <h3 data-testid="recipe-category">{category}</h3>
         <button type="button" onClick={ copyLink }>
           <img data-testid="share-btn" src={ shareIcon } alt="shareIcon" />
         </button>
@@ -69,8 +72,7 @@ function RecipeHeader({ recipe }) {
           />
         </button>
       </div>
-      {message && <p>{message}</p>}
-      <h3 data-testid="recipe-category">{category}</h3>
+      {message && <p className="message">{message}</p>}
     </header>
   );
 }

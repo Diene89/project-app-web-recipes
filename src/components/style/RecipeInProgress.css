@@ -1,11 +1,11 @@
-.RecipeDetails {
+.RecipeInProgress {
   background-color: lightgrey;
   padding: 0 5px;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   position: relative;
 }
 
-.RecipeDetails .start-recipe-btn {
+.RecipeInProgress .finish-recipe-btn {
   background-color: green;
   border: none;
   border-radius: 10px;
@@ -19,7 +19,12 @@
   right: 0;
 }
 
-.RecipeDetails .instructions {
+.RecipeInProgress .finish-recipe-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.RecipeInProgress .instructions {
   background-color: rgb(255, 166, 0);
   border-radius: 20px;
   font-size: 18px;
@@ -27,22 +32,7 @@
   padding: 10px;
 }
 
-.RecipeDetails h2 {
-  margin-bottom: 10px;
+.RecipeInProgress .instructions h2 {
+  margin-bottom: 15px;
   text-align: center;
-}
-
-.RecipeDetails .video {
-  align-items: center;
-  background-color: rgb(255, 166, 0);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  padding-bottom: 15px;
-}
-
-.RecipeDetails .video iframe {
-  height: 180px;
-  width: 320px;
 }

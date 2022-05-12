@@ -66,9 +66,12 @@ function RecommendationCardCarousel({
   }
 
   return (
-    <Carousel interval={ null } className="RecommendationCardCarousel">
-      {getCarouselItems()}
-    </Carousel>
+    <div className="RecommendationCardCarousel">
+      <h2>Recommended</h2>
+      <Carousel interval={ null } className="carousel">
+        {getCarouselItems()}
+      </Carousel>
+    </div>
   );
 }
 

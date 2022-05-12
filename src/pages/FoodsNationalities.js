@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { getFoods, getNationalitiesAPI,
   getFoodsByNationality } from '../services/RecipesAPI';
+import './styles/FoodsNationalities.css';
 
 function FoodsNationalities() {
   const [nationalities, setNationalities] = useState([]);
@@ -52,36 +53,41 @@ function FoodsNationalities() {
   const recipesQuantityLimit = 12;
 
   return (
-    <main>
+    <main className="FoodsNationalities">
       <Header title="Explore Nationalities" />
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        onChange={ (e) => getFoodsFiltered(e.target.value) }
-      >
-        {nationalities.map((nationality, index) => (
-          <option
-            key={ index }
-            data-testid={ `${nationality.strArea}-option` }
-          >
-            {nationality.strArea}
-          </option>))}
-        <option
-          data-testid="All-option"
+      <div className="dropdown-container">
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          onChange={ (e) => getFoodsFiltered(e.target.value) }
+          className="explore-by-nationality-dropdown"
         >
-          All
-        </option>
-      </select>
-      {recipes
-        .filter((recipe, index) => index < recipesQuantityLimit)
-        .map((food, index) => (<RecipeCard
-          testIdCard={ `${index}-recipe-card` }
-          testIdImg={ `${index}-card-img` }
-          testIdName={ `${index}-card-name` }
-          nameFood={ food.strMeal }
-          imgSrc={ food.strMealThumb }
-          key={ index }
-          detailPage={ `/foods/${food.idMeal}` }
-        />))}
+          {nationalities.map((nationality, index) => (
+            <option
+              key={ index }
+              data-testid={ `${nationality.strArea}-option` }
+            >
+              {nationality.strArea}
+            </option>))}
+          <option
+            data-testid="All-option"
+          >
+            All
+          </option>
+        </select>
+      </div>
+      <div className="explore-by-nationality-cards">
+        {recipes
+          .filter((recipe, index) => index < recipesQuantityLimit)
+          .map((food, index) => (<RecipeCard
+            testIdCard={ `${index}-recipe-card` }
+            testIdImg={ `${index}-card-img` }
+            testIdName={ `${index}-card-name` }
+            nameFood={ food.strMeal }
+            imgSrc={ food.strMealThumb }
+            key={ index }
+            detailPage={ `/foods/${food.idMeal}` }
+          />))}
+      </div>
 
       <Footer />
     </main>

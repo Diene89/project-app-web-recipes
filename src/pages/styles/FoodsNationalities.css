@@ -1,0 +1,52 @@
+.FoodsNationalities {
+  padding-bottom: 60px;
+}
+
+.FoodsNationalities .explore-by-nationality-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.FoodsNationalities .explore-by-nationality-cards a {
+  background-color: white;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  box-shadow: 1px 5px 3px rgb(185, 185, 185);
+  font-size: 14pt;
+  margin: 10px;
+  text-align: center;
+  width: 100px;
+}
+
+.explore-by-nationality-cards .recipe-card img {
+  width: 100px;
+}
+
+/* .dropdown-container {
+  padding: 0 10px;
+} */
+
+.dropdown-container .explore-by-nationality-dropdown {
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 0 5px black;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  margin: 15px auto;
+  outline: none;
+  padding: 3px;
+  text-align: center;
+}
+
+.dropdown-container .explore-by-nationality-dropdown option {
+  width: fit-content;
+}
+
+.dropdown-container .explore-by-nationality-dropdown:focus {
+  box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.8);
+}

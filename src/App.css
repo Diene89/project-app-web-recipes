@@ -122,36 +122,6 @@
   transition: 600ms;
 }
 
-header {
-  align-items: center;
-  background-color: rgb(255, 166, 0);
-  color: black;
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  left: 0;
-  padding: 5px;
-  width: 100%;
-}
-
-.section-header {
-  display: flex;
-}
-
-.header-profile {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-radio-butto {
-  border: 0.001px;
-  height: 1.3em;
-}
-
-.title-name {
-  color: white;
-}
-
 .category-filter-btn {
   display: flex;
   font-family: Poppins , sans-serif;
