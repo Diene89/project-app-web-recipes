@@ -10,3 +10,12 @@
 .RecommendationCard a {
   color: white;
 }
+
+.RecommendationCard h2 {
+  font-size: 30px;
+}
+
+.RecommendationCard h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
