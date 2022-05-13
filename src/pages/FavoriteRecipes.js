@@ -46,44 +46,52 @@ function FavoriteRecipes() {
   return (
     <main>
       <Header title="Favorite Recipes" showSearchIcon={ false } />
-      <RecipeType
-        btnName="All"
-        testId="filter-by-all-btn"
-        toFilter={ filterRecipes }
-      />
-      <RecipeType
-        btnName="Food"
-        testId="filter-by-food-btn"
-        toFilter={ filterRecipes }
-      />
-      <RecipeType
-        btnName="Drinks"
-        testId="filter-by-drink-btn"
-        toFilter={ filterRecipes }
-      />
-      {favorites && favorites.map((recipe, index) => (<FavoriteCard
-        type={ recipe.type }
-        nameRecipe={ recipe.name }
-        imgSrc={ recipe.image }
-        testIdCard={ `${index}-horizontal-image` }
-        testIdImg={ `${index}-horizontal-image` }
-        testIdName={ `${index}-horizontal-name` }
-        detailPage={ recipe.type === 'food'
-          ? `/foods/${recipe.id}` : `/drinks/${recipe.id}` }
-        testIdCategory={ `${index}-horizontal-top-text` }
-        categoryName={ recipe.category }
-        nationality={ recipe.nationality }
-        alcoholicOrNot={ recipe.alcoholicOrNot }
-        testIdShare={ `${index}-horizontal-share-btn` }
-        testIdFavoriteBtn={ `${index}-horizontal-favorite-btn` }
-        notFavorite={ () => notFavorite(recipe.id) }
-        copied={ recipe.id === idCopied }
-        toShare={ recipe.type === 'food'
-          ? () => copyShare(`http://localhost:3000/foods/${recipe.id}`, recipe.id)
-          : () => copyShare(`http://localhost:3000/drinks/${recipe.id}`, recipe.id) }
-        key={ index }
-      />
-      ))}
+      <section className="section-favorite-recipes">
+        <RecipeType
+          className="favorite-buttons"
+          btnName="All"
+          testId="filter-by-all-btn"
+          toFilter={ filterRecipes }
+        />
+        <RecipeType
+          className="favorite-buttons"
+          btnName="Food"
+          testId="filter-by-food-btn"
+          toFilter={ filterRecipes }
+        />
+        <RecipeType
+          className="favorite-buttons"
+          btnName="Drinks"
+          testId="filter-by-drink-btn"
+          toFilter={ filterRecipes }
+        />
+      </section>
+
+      <div className="div-favorite-recipes">
+        {favorites && favorites.map((recipe, index) => (<FavoriteCard
+          type={ recipe.type }
+          nameRecipe={ recipe.name }
+          imgSrc={ recipe.image }
+          testIdCard={ `${index}-horizontal-image` }
+          testIdImg={ `${index}-horizontal-image` }
+          testIdName={ `${index}-horizontal-name` }
+          detailPage={ recipe.type === 'food'
+            ? `/foods/${recipe.id}` : `/drinks/${recipe.id}` }
+          testIdCategory={ `${index}-horizontal-top-text` }
+          categoryName={ recipe.category }
+          nationality={ recipe.nationality }
+          alcoholicOrNot={ recipe.alcoholicOrNot }
+          testIdShare={ `${index}-horizontal-share-btn` }
+          testIdFavoriteBtn={ `${index}-horizontal-favorite-btn` }
+          notFavorite={ () => notFavorite(recipe.id) }
+          copied={ recipe.id === idCopied }
+          toShare={ recipe.type === 'food'
+            ? () => copyShare(`http://localhost:3000/foods/${recipe.id}`, recipe.id)
+            : () => copyShare(`http://localhost:3000/drinks/${recipe.id}`, recipe.id) }
+          key={ index }
+        />
+        ))}
+      </div>
     </main>
   );
 }

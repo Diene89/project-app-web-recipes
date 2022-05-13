@@ -38,18 +38,34 @@
 }
 
 .footer {
-  align-items: center;
-  background-color: rgb(11, 133, 7);
-  bottom: 0;
+  bottom: 20px;
   display: flex;
-  height: 60px;
-  justify-content: space-evenly;
+  height: 70px;
+  justify-content: center;
   left: 0;
   position: fixed;
-  width: 100%;
+  right: 0;
 }
 
 .footer > a {
+  padding: 10px;
+}
+
+.tag-footer {
+  align-self: center;
+  justify-content: space-evenly;
+  background-color: rgb(255, 166, 0);
+  border: 1px solid rgb(255, 166, 0);
+  border-radius: 30px;
+  box-shadow: rgb(185, 185, 185);
+  display: flex;
+  margin: 10px;
+  padding: 8px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.tag-footer:hover {
   padding: 10px;
 }
 
@@ -115,6 +131,10 @@
   width: 80%;
 }
 
+.btn-enter:hover {
+  padding: 10px;
+}
+
 .btn-enter:disabled {
   box-shadow: none;
   color: rgb(24, 24, 24);
@@ -157,17 +177,17 @@ header {
   justify-content: space-evenly;
 }
 
-.section-recipe-card > a {
+.section-recipe-card > a{
   align-content: space-between;
   background-color: white;
   border: 1px solid rgb(185, 185, 185);
   border-radius: 10px;
   box-shadow: 1px 5px 3px rgb(185, 185, 185);
-  font-size: 14pt;
+  font-size: 13pt;
   justify-content: space-around;
   margin-bottom: 10px;
   text-align: center;
-  width: 30%;
+  width: 47%;
 }
 
 .section-recipe-card > a img {
@@ -184,6 +204,144 @@ header {
 
 .div-recipes {
   margin-bottom: 70px;
+}
+
+.section-favorite-recipes button {
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  margin: 6px;
+  text-align: center;
+  border: none;
+}
+
+.section-favorite-recipes button:hover {
+  padding: 10px;
+}
+
+.div-favorite-recipes {
+  align-items: flex-start;
+  margin: 20px;
+}
+
+.card-favorite-recipes {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  box-shadow: 1px 5px 3px rgb(185, 185, 185);
+  margin-bottom: 30px;
+  font-size: small;
+}
+
+.card-favorite-recipes p {
+  font-weight: 500;
+  font-size: medium;
+}
+
+.card-favorite-recipes img.image-card {
+  width: 120px;
+}
+
+.card-favorite-recipes button {
+  border: none;
+}
+
+.favorite-recipe-detail {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.img-favorite-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+/* .section-done-recipes button {
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  margin: 6px;
+  text-align: center;
+  border: none;
+}
+
+.section-done-recipes button:hover {
+  padding: 10px;
+}
+
+.DoneCard p {
+  font-weight: 500;
+  font-size: medium;
+}
+
+.DoneCard img.image-card {
+  width: 120px;
+}
+
+.DoneCard button {
+  border: none;
+} */
+
+.section-done-recipes button {
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  margin: 6px;
+  text-align: center;
+  border: none;
+}
+
+.section-done-recipes button:hover {
+  padding: 10px;
+}
+
+.div-done-recipes {
+  align-items: flex-start;
+  margin: 20px;
+}
+
+.DoneCard {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  box-shadow: 1px 5px 3px rgb(185, 185, 185);
+  margin-bottom: 30px;
+  font-size: small;
+}
+
+.DoneCard p {
+  font-weight: 500;
+  font-size: medium;
+}
+
+.DoneCard img.card-image {
+  width: 120px;
+}
+
+.DoneCard button {
+  border: none;
+}
+
+.done-recipe-detail {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.img-done-icon {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
 }
 
 @keyframes shake {

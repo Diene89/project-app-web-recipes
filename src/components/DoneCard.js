@@ -17,31 +17,37 @@ function DoneCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
           data-testid={ testIdImg }
         />
       </Link>
-      <span data-testid={ testIdCategory }>
-        {type === 'food'
-          ? `${nationality} - ${categoryName}`
-          : alcoholicOrNot }
-      </span>
-      <Link to={ detailPage }>
-        <span data-testid={ testIdName }>{nameRecipe}</span>
-      </Link>
-      <button
-        type="button"
-        data-testid={ testIdShare }
-        src={ shareIcon }
-        onClick={ toShare }
-      >
-        <img src={ shareIcon } alt="shareIcon" />
-        {copied ? (<span>Link copied!</span>) : ''}
-      </button>
-      <span data-testid={ `${index}-horizontal-done-date` }>{`Done in: ${done}`}</span>
-      {tags.map((tag) => (
-        <span
-          key={ `${tag}-${index}` }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
+      <div className="done-recipe-detail">
+        <p data-testid={ testIdCategory }>
+          {type === 'food'
+            ? `${nationality} - ${categoryName}`
+            : alcoholicOrNot }
+        </p>
+        <Link to={ detailPage }>
+          <span data-testid={ testIdName }>{nameRecipe}</span>
+        </Link>
+      </div>
+
+      <div className="img-done-icon">
+        <button
+          type="button"
+          data-testid={ testIdShare }
+          src={ shareIcon }
+          onClick={ toShare }
         >
-          {tag}
-        </span>))}
+          <img src={ shareIcon } alt="shareIcon" />
+          {copied ? (<span>Link copied!</span>) : ''}
+        </button>
+        <span data-testid={ `${index}-horizontal-done-date` }>{`Done in: ${done}`}</span>
+        {tags.map((tag) => (
+          <span
+            key={ `${tag}-${index}` }
+            data-testid={ `${index}-${tag}-horizontal-tag` }
+          >
+            {tag}
+          </span>))}
+      </div>
+
     </div>
   );
 }
