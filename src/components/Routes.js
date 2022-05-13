@@ -17,11 +17,13 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 import FoodRecipeInProgress from '../pages/FoodRecipeInProgress';
 import DrinkRecipeInProgress from '../pages/DrinkRecipeInProgress';
 import NotFound from './NotFound';
+import Async from '../pages/Async';
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
+      <Route exact path="/" component={ Async } />
+      <Route exact path="/login" component={ Login } />
       <Route exact path="/foods" component={ MainFood } />
       <Route exact path="/foods/:id" component={ FoodRecipe } />
       <Route exact path="/foods/:id/in-progress" component={ FoodRecipeInProgress } />
