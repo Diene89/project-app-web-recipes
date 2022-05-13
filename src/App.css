@@ -131,6 +131,10 @@
   width: 80%;
 }
 
+.btn-enter:hover {
+  padding: 10px;
+}
+
 .btn-enter:disabled {
   box-shadow: none;
   color: rgb(24, 24, 24);
