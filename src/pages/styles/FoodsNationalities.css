@@ -25,10 +25,28 @@
   width: 100px;
 }
 
+/* .dropdown-container {
+  padding: 0 10px;
+} */
+
 .dropdown-container .explore-by-nationality-dropdown {
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 0 5px black;
   cursor: pointer;
   display: block;
   font-size: 20px;
-  margin: 10px auto;
-  padding: 5px;
+  margin: 15px auto;
+  outline: none;
+  padding: 3px;
+  text-align: center;
+}
+
+.dropdown-container .explore-by-nationality-dropdown option {
+  width: fit-content;
+}
+
+.dropdown-container .explore-by-nationality-dropdown:focus {
+  box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.8);
 }

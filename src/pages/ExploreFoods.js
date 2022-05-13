@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { randomFoods } from '../services/RecipesAPI';
-import './styles/ExploreFoods.css';
-import './styles/exploreButtons.css';
+import './styles/defaultButtons.css';
 
 function ExploreFoods(props) {
   const { history } = props;
@@ -16,11 +15,11 @@ function ExploreFoods(props) {
   };
 
   return (
-    <section className="section-explore-food">
+    <section>
       <Header title="Explore Foods" showSearchIcon={ false } />
 
       <section className="section-btn-explore">
-        <div className="explore-buttons">
+        <div className="default-buttons">
           <button
             type="button"
             data-testid="explore-by-ingredient"
