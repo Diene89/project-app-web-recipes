@@ -1,0 +1,11 @@
+.Profile .profile-email {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.Profile .default-buttons {
+  margin-top: 117px;
+}

@@ -1,3 +1,20 @@
+.RecipeIngredients {
+  background-color: rgb(255, 166, 0);
+  border-radius: 20px;
+  font-size: 18px;
+  margin: 10px auto 0;
+  padding: 10px;
+}
+
+.RecipeIngredients h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.RecipeIngredients .ingredient-checkbox {
+  margin-right: 10px;
+}
+
 .RecipeIngredients .ingredient-checkbox:checked + label {
   text-decoration: line-through;
 }

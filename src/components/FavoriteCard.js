@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import './style/FavoriteCard.css';
 
 function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
   testIdImg, testIdName, detailPage, testIdCategory, testIdFavoriteBtn, toShare,
   categoryName, testIdShare, copied, notFavorite }) {
   return (
-    <div className="FavoriteCard">
+    <div className="card-favorite-recipes">
       <Link to={ detailPage }>
         <img
           className="image-card"
@@ -18,31 +17,37 @@ function FavoriteCard({ nameRecipe, imgSrc, nationality, alcoholicOrNot, type,
           data-testid={ testIdImg }
         />
       </Link>
-      <span data-testid={ testIdCategory }>
-        {type === 'food'
-          ? `${nationality} - ${categoryName}`
-          : alcoholicOrNot }
-      </span>
-      <Link to={ detailPage }>
-        <span data-testid={ testIdName }>{nameRecipe}</span>
-      </Link>
-      <button
-        type="button"
-        data-testid={ testIdShare }
-        src={ shareIcon }
-        onClick={ toShare }
-      >
-        <img src={ shareIcon } alt="shareIcon" />
-        {copied ? (<span>Link copied!</span>) : ''}
-      </button>
-      <button
-        type="button"
-        data-testid={ testIdFavoriteBtn }
-        src={ blackHeartIcon }
-        onClick={ notFavorite }
-      >
-        <img src={ blackHeartIcon } alt="shareIcon" />
-      </button>
+      <div className="favorite-recipe-detail">
+        <p data-testid={ testIdCategory }>
+          {type === 'food'
+            ? `${nationality} - ${categoryName}`
+            : alcoholicOrNot }
+        </p>
+        <Link to={ detailPage }>
+          <span data-testid={ testIdName }>{nameRecipe}</span>
+        </Link>
+      </div>
+
+      <div className="img-favorite-icon">
+        <button
+          type="button"
+          data-testid={ testIdShare }
+          src={ shareIcon }
+          onClick={ toShare }
+        >
+          <img src={ shareIcon } alt="shareIcon" />
+          {copied ? (<span>Link copied!</span>) : ''}
+        </button>
+        <button
+          type="button"
+          data-testid={ testIdFavoriteBtn }
+          src={ blackHeartIcon }
+          onClick={ notFavorite }
+        >
+          <img src={ blackHeartIcon } alt="shareIcon" />
+        </button>
+      </div>
+
     </div>
   );
 }

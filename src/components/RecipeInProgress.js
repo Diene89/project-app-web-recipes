@@ -9,6 +9,7 @@ import {
   saveDoneRecipe,
   saveInProgressRecipe,
 } from '../helpers/localStorage';
+import './style/RecipeInProgress.css';
 
 function RecipeInProgress({ recipe, history }) {
   const isDrinkRecipe = recipe.strDrink !== undefined;
@@ -53,7 +54,7 @@ function RecipeInProgress({ recipe, history }) {
 
   function renderIngredientNameAndMeasureWithCheckbox() {
     return (
-      <>
+      <div className="RecipeIngredients">
         <h2>Ingredients</h2>
         <ul>
           {
@@ -76,7 +77,7 @@ function RecipeInProgress({ recipe, history }) {
             ))
           }
         </ul>
-      </>
+      </div>
     );
   }
 
@@ -86,12 +87,14 @@ function RecipeInProgress({ recipe, history }) {
 
       {renderIngredientNameAndMeasureWithCheckbox()}
 
-      <h2>Instructions</h2>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <div className="instructions">
+        <h2>Instructions</h2>
+        <p data-testid="instructions">{recipe.strInstructions}</p>
+      </div>
 
       <button
         type="button"
-        className="start-recipe-btn"
+        className="finish-recipe-btn"
         data-testid="finish-recipe-btn"
         onClick={ redirectToDoneRecipes }
         disabled={ ingredientNameAndMeasure.length !== recipeIngredients.length }

@@ -1,0 +1,18 @@
+.ExploreByIngredient {
+  padding-bottom: 60px;
+}
+
+.ExploreByIngredient .ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ExploreByIngredient .ingredients button {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 10px;
+  padding: 5px;
+}
